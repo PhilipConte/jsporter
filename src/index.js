@@ -34,6 +34,8 @@ const createWindow = async () => {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+    
+    require('./menu.js');
 
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
