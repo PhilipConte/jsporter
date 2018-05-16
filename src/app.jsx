@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import SplitPlane from 'react-split-pane';
 
 export default class App extends React.Component {
   render() {
@@ -11,10 +12,17 @@ export default class App extends React.Component {
         </TabList>
 
         <TabPanel>
-          <h2>Welcome to React!</h2>
+          <SplitPlane defaultSize={200}>
+            <div>
+              <h2>Hello World!</h2>
+            </div>
+            <div>
+              <h2>Welcome to React!</h2>
+            </div>
+          </SplitPlane>
         </TabPanel>
         <TabPanel>
-          <h2>Hello World!</h2>
+          <h2>just here for show</h2>
         </TabPanel>
       </Tabs>
     </div>);
