@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SplitPlane from 'react-split-pane';
 
+require('./dbScripts')
 export default class App extends React.Component {
     render() {
         return (<div>
