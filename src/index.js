@@ -15,6 +15,7 @@ const createWindow = async () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    show: false,
   });
 
   // and load the index.html of the app.
@@ -32,6 +33,10 @@ const createWindow = async () => {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  });
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
   });
 };
 
