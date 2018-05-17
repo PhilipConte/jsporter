@@ -13,7 +13,7 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 
 const createWindow = async () => {
     const store = new Store({
-        name: 'preferences',
+        name: 'main-preferences',
         defaults: {
             windowBounds: { width: 800, height: 600 }
         }
