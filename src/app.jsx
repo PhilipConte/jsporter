@@ -1,8 +1,11 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SplitPlane from 'react-split-pane';
+import { openDB, dbfoo, dbClose} from './dbAPI';
 
-require('./dbScripts')
+var db = openDB('mydb.db');
+dbfoo(db);
+dbClose(db);
 export default class App extends React.Component {
     render() {
         return (<div>
