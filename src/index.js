@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { enableLiveReload } from 'electron-compile';
+import Store from 'electron-store';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -11,11 +12,23 @@ const isDevMode = process.execPath.match(/[\\/]electron/);
 if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 
 const createWindow = async () => {
+    const store = new Store({
+        name: 'preferences',
+        defaults: {
+            windowBounds: { width: 800, height: 600 }
+        }
+    });
+    let { width, height } = store.get('windowBounds'); 
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: width,
+        height: height,
         show: false,
+    });
+
+    mainWindow.on('resize', () => {
+        let { width, height } = mainWindow.getBounds();
+        store.set('windowBounds', { width, height });
     });
 
     // and load the index.html of the app.
