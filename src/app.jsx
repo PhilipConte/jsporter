@@ -1,34 +1,49 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import SplitPlane from 'react-split-pane';
-import { openDB, dbfoo, dbClose} from './dbAPI';
+import { remote } from 'electron';
+import Store from 'electron-store';
+import TabContent from './tabContent';
+import { getDBDialog } from './dbDialogHelper';
+import {pathToName} from './util';
 
-var db = openDB('mydb.db');
-dbfoo(db);
-dbClose(db);
+const store = new Store({
+    name: 'renderer-preferences',
+    defaults: { 'focused': 0 } });
+
 export default class App extends React.Component {
-    render() {
-        return (<div>
-            <Tabs>
-                <TabList>
-                    <Tab>Title 1</Tab>
-                    <Tab>Title 2</Tab>
-                </TabList>
+    constructor(props) {
+        super(props);
+        this.state = { isloaded: false } }
 
-                <TabPanel>
-                    <SplitPlane defaultSize={200}>
-                        <div>
-                            <h2>Hello World!</h2>
-                        </div>
-                        <div>
-                            <h2>Welcome to React!</h2>
-                        </div>
-                    </SplitPlane>
-                </TabPanel>
-                <TabPanel>
-                    <h2>just here for show</h2>
-                </TabPanel>
-            </Tabs>
-        </div>);
+    render() {
+        if (!this.state.isloaded) {
+            return <h2> loading...</h2>
+        } else {
+            var files = this.state.files;
+            var names = pathToName(files);
+            var titles = names.map((names, index) =>
+                <Tab key={index}>{names}</Tab>);
+            var tabs = files.map((f, index) =>
+                <TabPanel key={index}><TabContent path={f}/></TabPanel>);
+            return (
+                <div><Tabs defaultIndex={this.props.focused}>
+                    <TabList>{titles}</TabList>
+                    {tabs}
+                </Tabs></div>
+            );
+        }
+    }
+
+    componentDidMount() {
+        function isEmpty() {
+            return !store.has('files') || !store.get('files').length
+            || (store.get('files').length == 1 && store.get('files')[0] == null); }
+        if(isEmpty()) {
+            const tempf = getDBDialog();
+            store.set('files', [(tempf) ? tempf : remote.getCurrentWindow().close()]);
+        }
+        console.log(store.get('files'));
+        if (store.get('focused') >= store.get('files').length) store.set('focused', 0);
+        this.setState({ isloaded: true, focused: store.get('focused'), files: store.get('files') });
     }
 }
