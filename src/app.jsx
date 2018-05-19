@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { remote } from 'electron';
 import Store from 'electron-store';
 import TabContent from './tabContent';
-import { getDBDialog } from './dbDialogHelper';
+import { getDBDialog } from './dialog';
 import {pathToName} from './util';
 
 const store = new Store({
