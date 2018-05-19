@@ -1,5 +1,4 @@
 export function pathToName(f) {
-    function conv(n) { return n.split('\\').pop()
-        .split('/').pop().split('.').reverse()[1];}
-    return (Array.isArray(f))? f.map((p) => conv(p)): conv(f);
+    if (Array.isArray(f)) return f.map((p) => pathToName(p));
+    return f.split('\\').pop().split('/').pop().split('.').reverse()[1];
 }
