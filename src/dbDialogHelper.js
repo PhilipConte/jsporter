@@ -1,7 +1,7 @@
 import electron, { remote } from 'electron';
 const { remote: { dialog } } = electron;
 
-function getDBDialog() {
+export function getDBDialog() {
     const ind = dialog.showMessageBox(
         remote.getCurrentWindow(),
         { type: "question",
@@ -37,5 +37,3 @@ function createOrSaveDialog(createorsave) {
         filters: [{ name: "Card Files (.db)", extensions: ['db'] }],
         properties: ["openFile", "createDirectory", "promptToCreate"]});
 }
-
-module.exports = { getDBDialog }
