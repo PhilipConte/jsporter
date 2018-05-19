@@ -37,3 +37,7 @@ function createOrSaveDialog(createorsave) {
         filters: [{ name: "Card Files (.db)", extensions: ['db'] }],
         properties: ["openFile", "createDirectory", "promptToCreate"]});
 }
+
+export function ezError(emessage) {
+    dialog.showErrorBox("Error!", emessage);
+}
