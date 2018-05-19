@@ -40,9 +40,8 @@ export default class App extends React.Component {
             || (store.get('files').length == 1 && store.get('files')[0] == null); }
         if(isEmpty()) {
             const tempf = getDBDialog();
-            store.set('files', [(tempf) ? tempf : remote.getCurrentWindow().close()]);
+            (tempf) ? store.set('files', [tempf]): remote.getCurrentWindow().close();
         }
-        console.log(store.get('files'));
         if (store.get('focused') >= store.get('files').length) store.set('focused', 0);
         this.setState({ isloaded: true, focused: store.get('focused'), files: store.get('files') });
     }
