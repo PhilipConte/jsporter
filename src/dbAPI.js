@@ -32,7 +32,10 @@ export default class DBAPI {
             this.Card.sync({ force: false })
             .then(() => this.Card.create({ name: card }))
             .then(() => this.createCardTable(card));
-        } else ezError("Duplicate Entry!");
+            return true;
+        }
+        ezError("Duplicate Entry!");
+        return false
     }
 
     createCardTable(card) {

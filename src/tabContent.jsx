@@ -13,8 +13,7 @@ export default class TabContent extends React.Component {
     }
 
     createCard(cname) {
-        //this.setState({ db: this.state.db.addCard(cname) });
-        this.state.db.addCard(cname)
+        return this.state.db.addCard(cname)
     }
 
     render() {
@@ -25,7 +24,7 @@ export default class TabContent extends React.Component {
             return (
                 <SplitPlane defaultSize={200}>
                     <div>
-                        <CardList cards={this.state.db.cards} handleCreate={this.createCard}/>
+                        <CardList cards={this.state.db.clist()} handleCreate={this.createCard}/>
                     </div>
                     <div>
                         <CardView />
