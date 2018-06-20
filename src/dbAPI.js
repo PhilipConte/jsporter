@@ -28,14 +28,14 @@ export default class DBAPI {
 
     addCard(card) {
         console.log('add card?', !this.clist().includes(card));
-        if (!this.clist().includes(card)) {
-            this.Card.sync({ force: false })
-            .then(() => this.Card.create({ name: card }))
-            .then(() => this.createCardTable(card));
-            return true;
+        if (this.clist().includes(card)) {
+            ezError("Duplicate Entry!");
+            return false
         }
-        ezError("Duplicate Entry!");
-        return false
+        this.Card.sync({ force: false })
+        .then(() => this.Card.create({ name: card }))
+        .then(() => this.createCardTable(card));
+        return true;
     }
 
     createCardTable(card) {
