@@ -1,5 +1,6 @@
 import React from 'react';
 import NameForm from './nameForm';
+import LiButton from './liButton';
 
 export default class CardList extends React.Component {
     constructor(props) {
@@ -24,6 +25,7 @@ export default class CardList extends React.Component {
                 <NameForm submitter={this.createCard}/>
                 <h2>cards</h2>
                 <ul>{lis}</ul>
+                <LiButton onClick={() => alert('button pressed')} text='click me'/>
             </div>);}}
 
     componentDidMount() {
