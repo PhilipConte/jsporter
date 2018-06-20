@@ -7,7 +7,10 @@ import DBAPI from './dbAPI';
 export default class TabContent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isloaded: false }}
+        this.state = { isloaded: false };
+
+        this.createCard = this.createCard.bind(this);
+    }
 
     createCard(cname) {
         //this.setState({ db: this.state.db.addCard(cname) });
@@ -31,6 +34,11 @@ export default class TabContent extends React.Component {
     );}}
 
     componentDidMount() {
-        this.setState({ isloaded: true, db:(new DBAPI(this.props.path)) });
+        var db = new DBAPI(this.props.path);
+        db.connect()
+        .then((database) => {
+            this.setState({ isloaded: true, db: db })
+            console.log('db connected:', database )
+        });
     }
 }
