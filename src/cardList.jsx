@@ -20,12 +20,13 @@ export default class CardList extends React.Component {
             return <h2>loading...</h2>
         } else {
             console.log('card list:',this.state.cards);
-            var lis = this.state.cards.map(c => <li key={c}>{c}</li>);
+            var lis = this.state.cards.map(c => <li key={c}>
+                <LiButton onClick={() => alert(c)} text={c}/>
+            </li>);
             return (<div>
                 <NameForm submitter={this.createCard}/>
                 <h2>cards</h2>
                 <ul>{lis}</ul>
-                <LiButton onClick={() => alert('button pressed')} text='click me'/>
             </div>);}}
 
     componentDidMount() {
