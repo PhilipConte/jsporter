@@ -7,12 +7,15 @@ export default class CardView extends React.Component {
 
     render() {
         if (!this.state.isloaded) {
-            return <h2> loading...</h2>
+            return <h2>loading...</h2>
+        } if (!this.props.selected) {
+            return <h2>select a card on the left</h2>;
         } else {
-            // ...
             return (
-                <h2>card info</h2>
-    );}}
+                <h2>{(this.props.selected) ? this.props.selected:'card info'}</h2>
+        );
+    }
+}
 
     componentDidMount() {
         this.setState({ isloaded: true });

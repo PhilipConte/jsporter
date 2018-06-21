@@ -7,13 +7,18 @@ import DBAPI from './dbAPI';
 export default class TabContent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isloaded: false };
+        this.state = { isloaded: false, selected: null };
 
         this.createCard = this.createCard.bind(this);
+        this.selectCard = this.selectCard.bind(this);
     }
 
-    createCard(cname) {
-        return this.state.db.addCard(cname)
+    createCard(card) {
+        return this.state.db.addCard(card);
+    }
+
+    selectCard(card) {
+        this.setState({selected: card})
     }
 
     render() {
@@ -24,10 +29,14 @@ export default class TabContent extends React.Component {
             return (
                 <SplitPlane defaultSize={200}>
                     <div>
-                        <CardList cards={this.state.db.clist()} handleCreate={this.createCard}/>
+                        <CardList
+                            cards={this.state.db.clist()}
+                            handleCreate={this.createCard}
+                            handleSelect={this.selectCard}
+                        />
                     </div>
                     <div>
-                        <CardView />
+                        <CardView selected={this.state.selected}/>
                     </div>
                 </SplitPlane>
     );}}

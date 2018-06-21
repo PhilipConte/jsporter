@@ -14,15 +14,15 @@ export default class CardList extends React.Component {
             this.setState({ cards: this.state.cards.concat(card) });
         }
     }
-
+    
     render() {
         if (!this.state.isloaded) {
             return <h2>loading...</h2>
         } else {
             console.log('card list:',this.state.cards);
-            var lis = this.state.cards.map(c => <li key={c}>
-                <LiButton onClick={() => alert(c)} text={c}/>
-            </li>);
+            var lis = this.state.cards.map(c =>
+                <LiButton key={c} onClick={()=>this.props.handleSelect(c)} text={c}/>
+            );
             return (<div>
                 <NameForm submitter={this.createCard}/>
                 <h2>cards</h2>

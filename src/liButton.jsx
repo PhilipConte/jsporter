@@ -13,8 +13,13 @@ export default class LiButton extends React.Component {
 
     render() {
         return (
-            <button onClick={this.clickEvent} className="clear-button">
-            {this.props.text}</button>
+            <li className="liButton">
+                <button
+                    onClick={this.clickEvent} className="liButton"
+                >
+                    {this.props.text}
+                </button>
+            </li>
         );
     }
 }
