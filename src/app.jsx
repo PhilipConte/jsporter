@@ -17,7 +17,7 @@ export default class App extends React.Component {
 
     render() {
         if (!this.state.isloaded) {
-            return <h2> loading...</h2>
+            return <h2>loading...</h2>
         } else {
             var files = this.state.files;
             var names = pathToName(files);

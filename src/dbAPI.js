@@ -7,23 +7,23 @@ export default class DBAPI {
         this.fp = p;
         this.fn = pathToName(this.fp);
         this.cards = {};
-        this.clist = () => Object.keys(this.cards);
+        this.clist = ()=>Object.keys(this.cards);
     }
 
     connect() {
         /*return*/ this.db = new Sequelize("sqlite:"+this.fp)
-        //.then(() => this.db.authenticate())
+        //.then(()=>this.db.authenticate())
         return this.db.authenticate()
-        .then(() => console.log('Connected to:', this.fp))
-        .catch(err => console.log('Error connecting to database:', err))
-        .then(() => this.Card = this.db.define('card', { name: Sequelize.STRING }))
-        .then(() => this.Card.sync({ force: false }))
-        .then(() => this.Card.findAll())
+        .then(()=>console.log('Connected to:', this.fp))
+        .catch(err=>console.log('Error connecting to database:', err))
+        .then(()=>this.Card = this.db.define('card', { name: Sequelize.STRING }))
+        .then(()=>this.Card.sync({ force: false }))
+        .then(()=>this.Card.findAll())
         .then((cards) => {
             cards.map(c => c.get('name')).filter(c => (c && c != `''s`))
             .forEach(c => this.createCardTable(c));
-        }).then(() => console.log('initial cards:', this.clist()))
-        .then(() => this.db);
+        }).then(()=>console.log('initial cards:', this.clist()))
+        .then(()=>this.db);
     }
 
     addCard(card) {
@@ -33,8 +33,8 @@ export default class DBAPI {
             return false
         }
         this.Card.sync({ force: false })
-        .then(() => this.Card.create({ name: card }))
-        .then(() => this.createCardTable(card));
+        .then(()=>this.Card.create({ name: card }))
+        .then(()=>this.createCardTable(card));
         return true;
     }
 
@@ -43,7 +43,7 @@ export default class DBAPI {
             {entry: Sequelize.STRING, content: Sequelize.STRING},
             {freezeTableName: true})
         .sync({ force: false })
-        .then(() => console.log('created table:', card))
-        .catch(err => console.log('Error creating table:', err));
+        .then(()=>console.log('created table:', card))
+        .catch(err=>console.log('Error creating table:', err));
     }
 }
