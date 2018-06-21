@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import {pathToName} from './util';
 import {ezError} from './dialog';
+import Promise from 'bluebird';
 
 export default class DBAPI {
     constructor(p) {
@@ -11,26 +12,25 @@ export default class DBAPI {
     }
 
     connect() {
-        /*return*/ this.db = new Sequelize("sqlite:"+this.fp)
-        //.then(()=>this.db.authenticate())
+        this.db = new Sequelize("sqlite:"+this.fp);
         return this.db.authenticate()
         .then(()=>console.log('Connected to:', this.fp))
-        .catch(err=>console.log('Error connecting to database:', err))
         .then(()=>this.Card = this.db.define('card', { name: Sequelize.STRING }))
         .then(()=>this.Card.sync({ force: false }))
         .then(()=>this.Card.findAll())
-        .then((cards) => {
-            cards.map(c => c.get('name')).filter(c => (c && c != `''s`))
-            .forEach(c => this.createCardTable(c));
-        }).then(()=>console.log('initial cards:', this.clist()))
-        .then(()=>this.db);
+        .then((cards) => 
+            Promise.map(cards.map(c => c.get('name')).filter(c => (c && c != `''s`)),
+            c => this.createCardTable(c))
+        ).then(()=>console.log('this.cards:', this.cards))
+        .then(()=>this.db)
+        .catch(err=>console.log('Error connecting to database:', err));
     }
 
     addCard(card) {
         console.log('add card?', !this.clist().includes(card));
         if (this.clist().includes(card)) {
             ezError("Duplicate Entry!");
-            return false
+            return false;
         }
         this.Card.sync({ force: false })
         .then(()=>this.Card.create({ name: card }))
@@ -39,10 +39,11 @@ export default class DBAPI {
     }
 
     createCardTable(card) {
-        this.cards[card] = this.db.define(card,
+        const newTable = this.db.define(card,
             {entry: Sequelize.STRING, content: Sequelize.STRING},
-            {freezeTableName: true})
-        .sync({ force: false })
+            {freezeTableName: true});
+        return newTable.sync({ force: false })
+        .then(()=>this.cards[card] = newTable)
         .then(()=>console.log('created table:', card))
         .catch(err=>console.log('Error creating table:', err));
     }
