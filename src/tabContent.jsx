@@ -3,22 +3,23 @@ import SplitPlane from 'react-split-pane';
 import CardList from './cardList';
 import CardView from './cardView';
 import DBAPI from './dbAPI';
+import autobind from 'autobind-decorator'
 
 export default class TabContent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isloaded: false, selected: null };
-
-        this.createCard = this.createCard.bind(this);
-        this.selectCard = this.selectCard.bind(this);
+        this.state = { isloaded: false, selected: null, cardData: [] };
     }
 
+    @autobind
     createCard(card) {
         return this.state.db.addCard(card);
     }
 
+    @autobind
     selectCard(card) {
-        this.setState({selected: card})
+        this.state.db.readCard(card)
+        .then(data => this.setState({selected: card, cardData: data}));
     }
 
     render() {
@@ -36,7 +37,10 @@ export default class TabContent extends React.Component {
                         />
                     </div>
                     <div>
-                        <CardView selected={this.state.selected}/>
+                        <CardView
+                            card={this.state.selected}
+                            rows={this.state.cardData}
+                        />
                     </div>
                 </SplitPlane>
     );}}

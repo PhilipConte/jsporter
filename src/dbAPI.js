@@ -2,7 +2,9 @@ import Sequelize from 'sequelize';
 import {pathToName} from './util';
 import {ezError} from './dialog';
 import Promise from 'bluebird';
+import autobind from 'autobind-decorator'
 
+@autobind
 export default class DBAPI {
     constructor(p) {
         this.fp = p;
@@ -46,5 +48,10 @@ export default class DBAPI {
         .then(()=>this.cards[card] = newTable)
         .then(()=>console.log('created table:', card))
         .catch(err=>console.log('Error creating table:', err));
+    }
+
+    readCard(card) {
+        return this.cards[card].findAll()
+        .then(rows=>rows.map(r=>[r.get('entry'), r.get('contet')]));
     }
 }
