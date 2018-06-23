@@ -3,33 +3,17 @@ import NameForm from './nameForm';
 import LiButton from './liButton';
 
 export default class CardList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { isloaded: false, cards: this.props.cards };
-        this.createCard = this.createCard.bind(this);
-    }
-
-    createCard(card) {
-        if (this.props.handleCreate(card)) {
-            this.setState({ cards: this.state.cards.concat(card) });
-        }
-    }
+    constructor(props) { super(props); }
     
     render() {
-        if (!this.state.isloaded) {
-            return <h2>loading...</h2>
-        } else {
-            console.log('card list:',this.state.cards);
-            var lis = this.state.cards.map(c =>
-                <LiButton key={c} onClick={()=>this.props.handleSelect(c)} text={c}/>
-            );
-            return (<div>
-                <NameForm submitter={this.createCard}/>
-                <h2>cards</h2>
-                <ul>{lis}</ul>
-            </div>);}}
-
-    componentDidMount() {
-        this.setState({ isloaded: true });
+        console.log('card list:',this.props.cards);
+        var lis = this.props.cards.map(c =>
+            <LiButton key={c} onClick={()=>this.props.handleSelect(c)} text={c}/>
+        );
+        return (<div>
+            <NameForm submitter={this.props.handleCreate}/>
+            <h2>cards</h2>
+            <ul>{lis}</ul>
+        </div>);
     }
 }

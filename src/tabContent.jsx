@@ -13,7 +13,8 @@ export default class TabContent extends React.Component {
 
     @autobind
     createCard(card) {
-        return this.state.db.addCard(card);
+        this.state.db.addCard(card)
+        .then(cards => this.setState({cards: cards}));
     }
 
     @autobind
@@ -31,7 +32,7 @@ export default class TabContent extends React.Component {
                 <SplitPlane defaultSize={200}>
                     <div>
                         <CardList
-                            cards={this.state.db.clist()}
+                            cards={this.state.cards}
                             handleCreate={this.createCard}
                             handleSelect={this.selectCard}
                         />
@@ -49,7 +50,7 @@ export default class TabContent extends React.Component {
         var db = new DBAPI(this.props.path);
         db.connect()
         .then((database) => {
-            this.setState({ isloaded: true, db: db })
+            this.setState({ isloaded: true, db: db, cards: db.clist() })
             console.log('db connected:', database )
         });
     }

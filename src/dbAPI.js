@@ -32,12 +32,12 @@ export default class DBAPI {
         console.log('add card?', !this.clist().includes(card));
         if (this.clist().includes(card)) {
             ezError("Duplicate Entry!");
-            return false;
+            return;
         }
-        this.Card.sync({ force: false })
+        return this.Card.sync({ force: false })
         .then(()=>this.Card.create({ name: card }))
-        .then(()=>this.createCardTable(card));
-        return true;
+        .then(()=>this.createCardTable(card))
+        .then(()=> this.clist());
     }
 
     createCardTable(card) {
