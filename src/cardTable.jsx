@@ -7,15 +7,18 @@ export default class CardView extends React.Component {
     }
 
     render() {
+        let css = "cardTable";
         let trs = this.state.rows.map(r=> <tr key={r[0]}>
-            <td className="cardTable">{r[0]}</td>
-            <td className="cardTable">{r[1]}</td>
-        </tr>)
+            <td className={css}>{r[0]}</td>
+            <td className={css}><textarea className={css} rows="1"
+                value={r[1]}
+            ></textarea></td>
+        </tr>);
         console.log('rows:', this.state.rows);
-        return (<table className="cardTable"><tbody>
+        return (<table className={css}><tbody>
             <tr>
-                <th className="cardTable">Entry</th>
-                <th className="cardTable">Content</th>
+                <th className={css}>Entry</th>
+                <th className={css}>Content</th>
             </tr>
             {trs}
         </tbody></table>);
