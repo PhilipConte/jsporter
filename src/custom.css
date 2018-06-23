@@ -6,15 +6,8 @@
     --col1: #d1ff82;
 }
 
-div.cardList {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+.h100 {height: 100%;}
+
 h1.cardList {
     background-color: var(--col9);
     margin-top: 0;
@@ -51,7 +44,7 @@ label.cardList {
     box-sizing: border-box;
 }
 ul.cardList {
-    /*background-color: var(--col5);*/
+    background-color: var(--col5);
     list-style-type: none;
     height: 100%;
     margin: 0;
@@ -60,9 +53,10 @@ ul.cardList {
 
 li.liButton {
     padding: 2px;
-    color: white;
 }
 button.liButton {
+    color: white;
+    font-size: 18px;
     background: Transparent no-repeat;
     border: none;
     cursor:pointer;

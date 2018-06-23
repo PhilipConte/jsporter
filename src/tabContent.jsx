@@ -29,7 +29,7 @@ export default class TabContent extends React.Component {
         }
         return (
             <SplitPlane defaultSize={220}>
-                <div><CardList
+                <div className="h100"><CardList
                     cards={this.state.cards}
                     handleCreate={this.createCard}
                     handleSelect={this.selectCard}
