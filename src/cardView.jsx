@@ -11,10 +11,10 @@ export default class CardView extends React.Component {
         if (!this.state.isloaded) {
             return <h2>loading...</h2>
         } if (!this.props.card) {
-            return <h2>select a card on the left</h2>;
+            return <h1>select a card on the left</h1>;
         } else {
             return (<div>
-                <h2>{(this.props.card)}</h2>
+                <h1>{(this.props.card)}</h1>
                 <CardTable rows={this.state.rows}/>
             </div>);
         }
