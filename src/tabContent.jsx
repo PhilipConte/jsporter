@@ -34,7 +34,7 @@ export default class TabContent extends React.Component {
                     handleCreate={this.createCard}
                     handleSelect={this.selectCard}
                 /></div>
-                <div><CardView
+                <div className="h100"><CardView
                     card={this.state.selected}
                     rows={this.state.cardData}
                 /></div>

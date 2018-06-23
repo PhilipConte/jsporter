@@ -14,7 +14,7 @@ export default class CardView extends React.Component {
         } if (!this.props.card) {
             return <h1 className={css}>Select a card on the left</h1>;
         }
-        return (<div>
+        return (<div className="h100">
             <h1 className={css}>{(this.props.card)}</h1>
             <CardTable rows={this.state.rows}/>
         </div>);
