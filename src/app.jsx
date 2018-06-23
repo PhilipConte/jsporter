@@ -25,12 +25,10 @@ export default class App extends React.Component {
                 <Tab key={index}>{names}</Tab>);
             var tabs = files.map((f, index) =>
                 <TabPanel key={index}><TabContent path={f}/></TabPanel>);
-            return (
-                <div><Tabs defaultIndex={this.props.focused}>
-                    <TabList>{titles}</TabList>
-                    {tabs}
-                </Tabs></div>
-            );
+            return (<Tabs defaultIndex={this.props.focused}>
+                <TabList>{titles}</TabList>
+                {tabs}
+            </Tabs>);
         }
     }
 
