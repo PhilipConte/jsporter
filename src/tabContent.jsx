@@ -28,7 +28,7 @@ export default class TabContent extends React.Component {
             return <h2>loading...</h2>
         }
         return (
-            <SplitPlane defaultSize={200}>
+            <SplitPlane defaultSize={220}>
                 <div><CardList
                     cards={this.state.cards}
                     handleCreate={this.createCard}

@@ -12,10 +12,11 @@ export default class LiButton extends React.Component {
     }
 
     render() {
+        let css = "liButton";
         return (
-            <li className="liButton">
+            <li className={css}>
                 <button
-                    onClick={this.clickEvent} className="liButton"
+                    onClick={this.clickEvent} className={css}
                 >
                     {this.props.text}
                 </button>

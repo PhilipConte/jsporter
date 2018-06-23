@@ -15,7 +15,7 @@ export default class CardView extends React.Component {
             ></textarea></td>
         </tr>);
         console.log('rows:', this.state.rows);
-        return (<table className={css}><tbody>
+        return (<table className={css}><tbody className={css}>
             <tr>
                 <th className={css}>Entry</th>
                 <th className={css}>Content</th>

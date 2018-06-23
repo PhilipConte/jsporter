@@ -8,16 +8,16 @@ export default class CardView extends React.Component {
     }
 
     render() {
+        let css = "cardView"
         if (!this.state.isloaded) {
             return <h2>loading...</h2>
         } if (!this.props.card) {
-            return <h1>select a card on the left</h1>;
-        } else {
-            return (<div>
-                <h1>{(this.props.card)}</h1>
-                <CardTable rows={this.state.rows}/>
-            </div>);
+            return <h1 className={css}>Select a card on the left</h1>;
         }
+        return (<div>
+            <h1 className={css}>{(this.props.card)}</h1>
+            <CardTable rows={this.state.rows}/>
+        </div>);
     }
 
     static getDerivedStateFromProps(nextProps, prevState){

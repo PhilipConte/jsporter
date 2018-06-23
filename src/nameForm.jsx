@@ -20,13 +20,16 @@ export default class NameForm extends React.Component {
     }
 
     render() {
+        let css = this.props.className;
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
+            <form className={css} onSubmit={this.handleSubmit}>
+                <label className={css}>
                     Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} size="10"/>
+                    <input type="text" size="10" className={css}
+                        value={this.state.value} onChange={this.handleChange}
+                    />
                 </label>
-                <input type="submit" value="Submit" />
+                <input className={css} type="submit" value="Submit" />
             </form>
         );
     }
