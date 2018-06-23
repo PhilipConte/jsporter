@@ -1,10 +1,9 @@
 :root {
-    --col9: #7a0000;
-    --col7: #a10705;
-    --col5: #c6262e;
-    --col3: #ed5353;
-    --col1: #ff8c82;
-    --colm: #c6262e;
+    --col9: #206b00;
+    --col7: #3a9104;
+    --col5: #68b723;
+    --col3: #9dbb4d;
+    --col1: #d1ff82;
 }
 
 div.cardList {
