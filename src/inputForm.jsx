@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class NameForm extends React.Component {
+export default class InputForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = { value: '' };
@@ -24,7 +24,7 @@ export default class NameForm extends React.Component {
         return (
             <form className={css} onSubmit={this.handleSubmit}>
                 <label className={css}>
-                    Name:
+                    {this.props.text}
                     <input type="text" size="10" className={css}
                         value={this.state.value} onChange={this.handleChange}
                     />
