@@ -7,14 +7,15 @@ export default class CardView extends React.Component {
     }
 
     render() {
-        let trs = this.state.rows.map(r=>
-            <tr key={r[0]}><td>{r[0]}</td><td>{r[1]}</td></tr>
-        )
+        let trs = this.state.rows.map(r=> <tr key={r[0]}>
+            <td className="cardTable">{r[0]}</td>
+            <td className="cardTable">{r[1]}</td>
+        </tr>)
         console.log('rows:', this.state.rows);
-        return (<table><tbody>
+        return (<table className="cardTable"><tbody>
             <tr>
-                <th>Entry</th>
-                <th>Content</th>
+                <th className="cardTable">Entry</th>
+                <th className="cardTable">Content</th>
             </tr>
             {trs}
         </tbody></table>);

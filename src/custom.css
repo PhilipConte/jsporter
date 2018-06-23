@@ -12,3 +12,20 @@ button.liButton {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
 }
+
+table.cardTable {
+    width: 100%;
+    border:none;
+    border-collapse: collapse;
+}
+th.cardTable{
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+td.cardTable {
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+}
+.cardTable tr:hover {background-color: #f5f5f5;}
+table.cardTable td.cardTable + td.cardTable,
+table.cardTable th.cardTable + th.cardTable  { border-left:2px solid black; }
