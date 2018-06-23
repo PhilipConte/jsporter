@@ -17,8 +17,19 @@ export default class CardView extends React.Component {
         );
     }
 }
-    componentWillReceiveProps(nextProps) {
-        this.setState({rows: nextProps.rows, card: nextProps.card})
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.rows !== prevState.rows){
+            return { rows: nextProps.someValue};
+        }
+        else return null;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.rows !== this.props.rows){
+            //Perform some operation here
+            this.setState({rows: this.props.rows});
+        }
     }
 
     componentDidMount() {
