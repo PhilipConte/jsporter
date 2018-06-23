@@ -26,32 +26,27 @@ export default class TabContent extends React.Component {
     render() {
         if (!this.state.isloaded) {
             return <h2>loading...</h2>
-        } else {
-            // ...
-            return (
-                <SplitPlane defaultSize={200}>
-                    <div>
-                        <CardList
-                            cards={this.state.cards}
-                            handleCreate={this.createCard}
-                            handleSelect={this.selectCard}
-                        />
-                    </div>
-                    <div>
-                        <CardView
-                            card={this.state.selected}
-                            rows={this.state.cardData}
-                        />
-                    </div>
-                </SplitPlane>
-    );}}
+        }
+        return (
+            <SplitPlane defaultSize={200}>
+                <div><CardList
+                    cards={this.state.cards}
+                    handleCreate={this.createCard}
+                    handleSelect={this.selectCard}
+                /></div>
+                <div><CardView
+                    card={this.state.selected}
+                    rows={this.state.cardData}
+                /></div>
+            </SplitPlane>
+        );
+    }
 
     componentDidMount() {
         var db = new DBAPI(this.props.path);
         db.connect()
-        .then((database) => {
+        .then(()=> 
             this.setState({ isloaded: true, db: db, cards: db.clist() })
-            console.log('db connected:', database )
-        });
+        );
     }
 }
