@@ -52,6 +52,6 @@ export default class DBAPI {
 
     readCard(card) {
         return this.cards[card].findAll()
-        .then(rows=>rows.map(r=>[r.get('entry'), r.get('contet')]));
+        .then(rows=>rows.map(r=>[r.get('entry'), r.get('content')]));
     }
 }
