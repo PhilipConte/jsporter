@@ -14,7 +14,8 @@ export default class TabContent extends React.Component {
     @autobind
     createCard(card) {
         this.state.db.addCard(card)
-        .then(cards => this.setState({cards: cards}));
+        .then(cards => this.setState({cards: cards}))
+        .catch(err=>console.log("error adding card:", err));
     }
 
     @autobind

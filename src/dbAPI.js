@@ -31,8 +31,8 @@ export default class DBAPI {
     addCard(card) {
         console.log('add card?', !this.clist().includes(card));
         if (this.clist().includes(card)) {
-            ezError("Duplicate Entry!");
-            return;
+            ezError("Duplicate Card!");
+            return new Promise((res)=>{throw new Error("Duplicate Card!");});
         }
         return this.Card.sync({ force: false })
         .then(()=>this.Card.create({ name: card }))
