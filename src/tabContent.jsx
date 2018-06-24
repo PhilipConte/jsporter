@@ -15,6 +15,7 @@ export default class TabContent extends React.Component {
     createCard(card) {
         this.state.db.addCard(card)
         .then(cards => this.setState({cards: cards}))
+        .then(()=>this.selectCard(card))
         .catch(err=>console.log("error adding card:", err));
     }
 
@@ -31,6 +32,7 @@ export default class TabContent extends React.Component {
         .then("entry added. New card data:", this.state.cardData)
         .catch(err=>console.log("error adding entry:", err));
     }
+    
     @autobind
     updateContent(card, entry, text) {
         this.state.db.updateContent(card, entry, text)
