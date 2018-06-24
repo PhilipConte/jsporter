@@ -24,6 +24,21 @@ export default class TabContent extends React.Component {
         .then(data => this.setState({selected: card, cardData: data}));
     }
 
+    @autobind
+    addEntry(card, entry) {
+        this.state.db.addEntry(card, entry)
+        .then(data => this.setState({cardData: data}))
+        .then("entry added. New card data:", this.state.cardData)
+        .catch(err=>console.log("error adding entry:", err));
+    }
+    @autobind
+    updateContent(card, entry, text) {
+        this.state.db.updateContent(card, entry, text)
+        .then(data => this.setState({cardData: data}))
+        .then("content updated. New card data:", this.state.cardData)
+        .catch(err=>console.log("error updating content:", err));
+    }
+
     render() {
         if (!this.state.isloaded) {
             return <h2>loading...</h2>
@@ -36,6 +51,8 @@ export default class TabContent extends React.Component {
                     handleSelect={this.selectCard}
                 /></div>
                 <div className="h100"><CardView
+                    handleCreate={this.addEntry}
+                    handleType={this.updateContent}
                     card={this.state.selected}
                     rows={this.state.cardData}
                 /></div>

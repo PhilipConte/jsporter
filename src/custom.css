@@ -74,6 +74,34 @@ h1.cardView {
     color: white;
     padding: 8px;
 }
+form.cardView {
+    background-color: var(--col7);
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 8px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+input.cardView {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+label.cardView {
+    background-color: var(--col7);
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
 table.cardTable {
     width: 100%;
@@ -84,7 +112,7 @@ table.cardTable {
 }
 th.cardTable{
     text-align: left;
-    background-color: var(--col7);
+    background-color: var(--col5);
     color: white;
     padding: 8px;
 }

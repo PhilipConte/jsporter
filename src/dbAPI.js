@@ -54,4 +54,28 @@ export default class DBAPI {
         return this.cards[card].findAll()
         .then(rows=>rows.map(r=>[r.get('entry'), r.get('content')]));
     }
+
+    addEntry(card, entry) {
+        return this.cards[card]
+        .findOrCreate({where: {entry: entry}, defaults: {content: ''}})
+        .then(data=> {
+            let created = data[1];
+            if (!created) {
+                ezError("Duplicate Entry!");
+                throw new Error("Duplicate Entry!");
+            }
+        }).then(()=>this.readCard(card));
+    }
+
+    updateContent(card, entry, text) {
+        return this.cards[card]
+        .find({ where: { entry: entry } })
+        .then(record=>{
+            if (!record) {
+                ezError("Entry Not Found!");
+                throw new Error("Entry Not Found!")
+            } else {return record};
+        }).then(record=>record.updateAttributes({content: text})
+        .then(()=>this.readCard(card)));
+    }
 }
