@@ -8,7 +8,7 @@ import autobind from 'autobind-decorator'
 export default class TabContent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isloaded: false, selected: null, cardData: [] };
+        this.state = { isLoaded: false, selected: null, cardData: [] };
     }
 
     @autobind
@@ -42,7 +42,7 @@ export default class TabContent extends React.Component {
     }
 
     render() {
-        if (!this.state.isloaded) {
+        if (!this.state.isLoaded) {
             return <h2>loading...</h2>
         }
         return (
@@ -66,7 +66,7 @@ export default class TabContent extends React.Component {
         var db = new DBAPI(this.props.path);
         db.connect()
         .then(()=> 
-            this.setState({ isloaded: true, db: db, cards: db.clist() })
+            this.setState({ isLoaded: true, db: db, cards: db.cList() })
         );
     }
 }

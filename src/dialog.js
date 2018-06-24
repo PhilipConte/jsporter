@@ -29,15 +29,15 @@ function openDialog() {
     return null;
 }
 
-function createOrSaveDialog(createorsave) {
+function createOrSaveDialog(createOrSave) {
     return dialog.showSaveDialog(
         remote.getCurrentWindow(),
-        { title: createorsave + " (.db)",
-        buttonLabel: createorsave,
+        { title: createOrSave + " (.db)",
+        buttonLabel: createOrSave,
         filters: [{ name: "Card Files (.db)", extensions: ['db'] }],
         properties: ["openFile", "createDirectory", "promptToCreate"]});
 }
 
-export function ezError(emessage) {
-    dialog.showErrorBox("Error!", emessage);
+export function ezError(eMessage) {
+    dialog.showErrorBox("Error!", eMessage);
 }

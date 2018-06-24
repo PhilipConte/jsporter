@@ -10,7 +10,7 @@ export default class DBAPI {
         this.fp = p;
         this.fn = pathToName(this.fp);
         this.cards = {};
-        this.clist = ()=>Object.keys(this.cards);
+        this.cList = ()=>Object.keys(this.cards);
     }
 
     connect() {
@@ -29,15 +29,15 @@ export default class DBAPI {
     }
 
     addCard(card) {
-        console.log('add card?', !this.clist().includes(card));
-        if (this.clist().includes(card)) {
+        console.log('add card?', !this.cList().includes(card));
+        if (this.cList().includes(card)) {
             ezError("Duplicate Card!");
             return new Promise((res)=>{throw new Error("Duplicate Card!");});
         }
         return this.Card.sync({ force: false })
         .then(()=>this.Card.create({ name: card }))
         .then(()=>this.createCardTable(card))
-        .then(()=> this.clist());
+        .then(()=> this.cList());
     }
 
     createCardTable(card) {
