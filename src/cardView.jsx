@@ -5,14 +5,11 @@ import InputForm from './inputForm';
 export default class CardView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isloaded: false };
     }
 
     render() {
         let css = "cardView"
-        if (!this.state.isloaded) {
-            return <h2>loading...</h2>
-        } if (!this.props.card) {
+        if (!this.props.card) {
             return <h1 className={css}>Select a card on the left</h1>;
         }
         return (<div className="h100">
@@ -24,9 +21,5 @@ export default class CardView extends React.Component {
                 handleType={(entry, text)=>this.props.handleType(this.props.card, entry, text)}
             />
         </div>);
-    }
-
-    componentDidMount() {
-        this.setState({ isloaded: true });
     }
 }
