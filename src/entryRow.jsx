@@ -28,6 +28,7 @@ export default class EntryRow extends React.Component {
 
     render() {
         let css = this.props.className;
+        const lines = (this.props.row[1].match(/\r?\n/g) || '').length + 1;
         return (<tr>
             <td className={css}
                 onClick={this.handleClick} onContextMenu={this.handleClick}
@@ -35,7 +36,7 @@ export default class EntryRow extends React.Component {
                 {this.props.row[0]}
             </td>
             <td className={css}><textarea
-                className={css} rows="1"
+                className={css} rows={lines}
                 value={this.props.row[1]} onChange={this.onType}
                 ref={(el) => this.aRef = el}
             ></textarea></td>
