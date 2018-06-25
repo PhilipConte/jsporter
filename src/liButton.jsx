@@ -1,4 +1,5 @@
 import React from 'react';
+import autobind from 'autobind-decorator';
 
 export default class LiButton extends React.Component {
     constructor(props) {
@@ -7,16 +8,25 @@ export default class LiButton extends React.Component {
     }
 
     clickEvent(event) {
+    }
+    @autobind
+    handleClick(e) {
         event.preventDefault();
-        this.props.onClick();
+        if (e.type === 'click') {
+            console.log('Left click');
+            this.props.onClick();
+        } else if (e.type === 'contextmenu') {
+            console.log('Right click');
+            this.props.onRightClick();
+        }
     }
 
     render() {
         let css = "liButton";
         return (
             <li className={css}>
-                <button
-                    onClick={this.clickEvent} className={css}
+                <button className={css}
+                    onClick={this.handleClick} onContextMenu={this.handleClick}
                 >
                     {this.props.text}
                 </button>

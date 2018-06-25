@@ -10,7 +10,10 @@ export default class CardList extends React.Component {
         console.log('card list:',this.props.cards);
 
         var lis = this.props.cards.map(c =>
-            <LiButton key={c} onClick={()=>this.props.handleSelect(c)} text={c}/>
+            <LiButton key={c} text={c}
+                onClick={()=>this.props.handleSelect(c)}
+                onRightClick={()=>this.props.handleDelete(c)}
+            />
         );
         
         return (<div className="h100">

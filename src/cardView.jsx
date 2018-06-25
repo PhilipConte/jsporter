@@ -26,6 +26,7 @@ export default class CardView extends React.Component {
             </div>
             <CardTable rows={this.props.rows}
                 handleType={(entry, text)=>this.props.handleType(this.props.card, entry, text)}
+                handleDelete={entry=>this.props.handleDelete(this.props.card, entry)}
             />
         </div>);
     }

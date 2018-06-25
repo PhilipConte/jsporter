@@ -29,7 +29,6 @@ export default class DBAPI {
     }
 
     addCard(card) {
-        console.log('add card?', !this.cList().includes(card));
         if (this.cList().includes(card)) {
             ezError("Duplicate Card!");
             return new Promise((res)=>{throw new Error("Duplicate Card!");});
@@ -77,5 +76,19 @@ export default class DBAPI {
             } else {return record};
         }).then(record=>record.updateAttributes({content: text})
         .then(()=>this.readCard(card)));
+    }
+
+    deleteEntry(card, entry) {
+        return this.cards[card]
+        .destroy({ where: { entry: entry }, limit: 1 })
+        .then(()=>this.readCard(card));
+    }
+
+    deleteCard(card) {
+        return this.Card
+        .destroy({ where: { name: card }, limit: 1 })
+        .then(()=>this.cards[card].drop())
+        .then(()=> delete this.cards[card])
+        .then(()=>this.cList());
     }
 }

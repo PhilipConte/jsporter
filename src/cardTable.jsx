@@ -10,6 +10,7 @@ export default class CardView extends React.Component {
         let trs = this.props.rows.map(r=> <EntryRow key={r[0]}
             row={r} className={css}
             onType={this.props.handleType}
+            handleDelete={this.props.handleDelete}
         />);
         return (<table className={css}><tbody className={css}>
             <tr>
