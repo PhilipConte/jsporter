@@ -1,9 +1,9 @@
 import React from 'react'
 import SplitPlane from 'react-split-pane';
+import autobind from 'autobind-decorator';
 import CardList from './cardList';
 import CardView from './cardView';
 import DBAPI from './dbAPI';
-import autobind from 'autobind-decorator'
 
 export default class TabContent extends React.Component {
     constructor(props) {
@@ -46,7 +46,7 @@ export default class TabContent extends React.Component {
             return <h2>loading...</h2>
         }
         return (
-            <SplitPlane defaultSize={220}>
+            <SplitPlane defaultSize={150}>
                 <div className="h100"><CardList
                     cards={this.state.cards}
                     handleCreate={this.createCard}
