@@ -1,6 +1,7 @@
 import React from 'react';
 import CardTable from './cardTable';
 import InputDialog from './inputDialog';
+import CenterText from './centerText';
 
 export default class CardView extends React.Component {
     constructor(props) {
@@ -10,9 +11,7 @@ export default class CardView extends React.Component {
     render() {
         const css = "cardView"
         if (!this.props.card) {
-            return <div id='full'><div id='empty'>
-                <p>Select or create a card from the sidebar</p>
-            </div></div>;
+            return <CenterText text='Select or create a card from the sidebar'/>;
         }
         return (<div className='h100'>
             <h1 className={css}>{(this.props.card)}</h1>

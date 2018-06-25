@@ -48,16 +48,20 @@ button.liButton {
     box-shadow: none;
 }
 
-#full {
-    height: 100%; width: 100%; position: relative;
+.centerTextParent {
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;}
-#empty {
-    max-width: 50%;
-    position:absolute;
-    top:42%;
+    height: 90%;
+    margin: 0;
 }
+.centerTextChild {
+    display: flex;
+    width: auto;
+    font-size: 20px;
+    margin: 0;
+}
+
 h1.cardView {
     background-color: var(--col9);
     margin-top: 0;
