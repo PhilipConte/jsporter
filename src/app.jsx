@@ -1,7 +1,7 @@
 import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { remote } from 'electron';
 import Store from 'electron-store';
+import TabPanel from './tabPanel';
 import TabContent from './tabContent';
 import { getDBDialog } from './dialog';
 import {pathToName} from './util';
@@ -13,29 +13,40 @@ const store = new Store({
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isLoaded: false } }
+        this.state = { isLoaded: false };
+    }
 
     render() {
         if (!this.state.isLoaded) {
             return <h2>loading...</h2>
-        } else {
-            var files = this.state.files;
-            var names = pathToName(files);
-            var titles = names.map((names, index) =>
-                <Tab key={index}>{names}</Tab>);
-            var tabs = files.map((f, index) =>
-                <TabPanel key={index}><TabContent path={f}/></TabPanel>);
-            return (<Tabs defaultIndex={this.props.focused}>
-                <TabList>{titles}</TabList>
-                {tabs}
-            </Tabs>);
         }
+        
+        const { files } = this.state;
+        const names = pathToName(files);
+        const tabs = files.map(f =>
+            <TabContent path={f}/>
+        );
+
+        return (
+            <TabPanel
+                defaultIndex={this.state.focused}
+                titles={names}
+                tabs={tabs}
+            />
+        );
     }
 
     componentDidMount() {
         function isEmpty() {
-            return !store.has('files') || !store.get('files').length
-            || (store.get('files').length == 1 && store.get('files')[0] == null); }
+            return (
+                !store.has('files')
+                || !store.get('files').length
+                || (
+                    store.get('files').length == 1
+                    && store.get('files')[0] == null
+                )
+            );
+        }
         if(isEmpty()) {
             const tempF = getDBDialog();
             (tempF) ? store.set('files', [tempF]): remote.getCurrentWindow().close();
