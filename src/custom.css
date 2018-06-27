@@ -1,16 +1,24 @@
 :root {
-    --col9: #206b00;
-    --col7: #3a9104;
-    --col5: #68b723;
-    --col3: #9dbb4d;
-    --col1: #d1ff82;
+    --col9: #1A237E;
+    --col8: #283593;
+    --col7: #303F9F;
+    --col6: #3949AB;
+    --col5: #3F51B5;
+    --col4: #5C6BC0;
+    --col3: #7986CB;
+    --col2: #9FA8DA;
+    --col1: #C5CAE9;
+    --col0: #E8EAF6;
 }
 
 .h100 {height: 100%;}
 
+#tabBar {
+    background-color: var(--col9);
+}
 
 h1.cardList {
-    background-color: var(--col9);
+    background-color: var(--col8);
     margin-top: 0;
     margin-bottom: 0;
     color: white;
@@ -18,14 +26,15 @@ h1.cardList {
 }
 div.cardList {
     background-color: var(--col7);
+    display: flex;
+    justify-content: center;
 }
 Button.cardList {
-/*     background-color: var(--col3); */
+    background-color: var(--col3);
     color: white;
-    width: 100%;
 }
 ul.cardList {
-    background-color: var(--col5);
+    background-color: var(--col6);
     list-style-type: none;
     height: 100%;
     margin: 0;
@@ -63,7 +72,7 @@ button.liButton {
 }
 
 h1.cardView {
-    background-color: var(--col9);
+    background-color: var(--col8);
     margin-top: 0;
     margin-bottom: 0;
     color: white;
@@ -88,7 +97,7 @@ table.cardTable {
 }
 th.cardTable{
     text-align: left;
-    background-color: var(--col5);
+    background-color: var(--col6);
     color: white;
     padding: 8px;
 }

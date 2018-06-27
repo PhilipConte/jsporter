@@ -23,7 +23,6 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         width: '100%',
-        backgroundColor: theme.palette.background.paper,
     },
 });
 
@@ -53,12 +52,10 @@ class TabPanel extends React.Component {
         ));
 
         return (<div>
-            <AppBar position="static" color="default">
+            <AppBar position="static" id='tabBar'>
                 <Tabs
                     value={value}
                     onChange={this.handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
                     scrollable
                     scrollButtons="auto"
                 >
