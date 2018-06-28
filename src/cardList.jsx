@@ -54,7 +54,6 @@ class CardList extends React.Component {
     
     render() {
         const { classes } = this.props;
-        const css = "cardList";
         console.log('card list:',this.props.cards);
 
         var lis = this.props.cards.map(c =>
