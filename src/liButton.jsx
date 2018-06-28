@@ -1,5 +1,6 @@
 import React from 'react';
 import autobind from 'autobind-decorator';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export default class LiButton extends React.Component {
     constructor(props) {
@@ -23,14 +24,14 @@ export default class LiButton extends React.Component {
 
     render() {
         let css = "liButton";
-        return (
-            <li className={css}>
+        return (<li className={css}>
+            <Tooltip title='Right Click to Delete' placement='top'>
                 <button className={css}
                     onClick={this.handleClick} onContextMenu={this.handleClick}
                 >
                     {this.props.text}
                 </button>
-            </li>
-        );
+            </Tooltip>
+        </li>);
     }
 }

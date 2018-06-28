@@ -12,6 +12,12 @@
 }
 
 .h100 {height: 100%;}
+.borderless {
+    display:inline-block;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
 
 #tabBar {
     background-color: var(--col9);

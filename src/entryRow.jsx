@@ -1,5 +1,6 @@
 import React from 'react';
 import autobind from 'autobind-decorator';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export default class EntryRow extends React.Component {
     constructor(props) {
@@ -29,11 +30,14 @@ export default class EntryRow extends React.Component {
     render() {
         let css = this.props.className;
         const lines = (this.props.row[1].match(/\r?\n/g) || '').length + 1;
-        return (<tr>
+        return (<tr>    
             <td className={css}
                 onClick={this.handleClick} onContextMenu={this.handleClick}
             >
-                {this.props.row[0]}
+
+                <Tooltip title='Right Click to Delete' placement='top'>
+                    <p className='borderless'>{this.props.row[0]}</p>
+                </Tooltip>
             </td>
             <td className={css}><textarea
                 className={css} rows={lines}
