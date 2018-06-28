@@ -23,15 +23,12 @@ export default class LiButton extends React.Component {
     }
 
     render() {
-        let css = "liButton";
-        return (<li className={css}>
-            <Tooltip title='Right Click to Delete' placement='top'>
-                <button className={css}
-                    onClick={this.handleClick} onContextMenu={this.handleClick}
-                >
-                    {this.props.text}
-                </button>
-            </Tooltip>
-        </li>);
+        return (<Tooltip title='Right Click to Delete' placement='top'>
+            <button className={this.props.className}
+                onClick={this.handleClick} onContextMenu={this.handleClick}
+            >
+                {this.props.text}
+            </button>
+        </Tooltip>);
     }
 }

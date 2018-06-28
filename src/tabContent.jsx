@@ -1,14 +1,13 @@
 import React from 'react'
-import SplitPlane from 'react-split-pane';
 import autobind from 'autobind-decorator';
-import CardList from './cardList';
+import CenterText from './centerText';
 import CardView from './cardView';
 import DBAPI from './dbAPI';
 
 export default class TabContent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isLoaded: false, selected: null, cardData: [] };
+        this.state = { isLoaded: false, selected: '', cardData: [] };
     }
 
     @autobind
@@ -55,25 +54,19 @@ export default class TabContent extends React.Component {
 
     render() {
         if (!this.state.isLoaded) {
-            return <h2>loading...</h2>
+            return  <CenterText text='loading...'/>;
         }
-        return (
-            <SplitPlane defaultSize={150}>
-                <div className="h100"><CardList
-                    cards={this.state.cards}
-                    handleCreate={this.createCard}
-                    handleSelect={this.selectCard}
-                    handleDelete={this.deleteCard}
-                /></div>
-                <div className="h100"><CardView
-                    card={this.state.selected}
-                    rows={this.state.cardData}
-                    handleCreate={this.addEntry}
-                    handleType={this.updateContent}
-                    handleDelete={this.deleteEntry}
-                /></div>
-            </SplitPlane>
-        );
+        return (<CardView
+            card={this.state.selected}
+            cards={this.state.cards}
+            entries={this.state.cardData}
+            createCard={this.createCard}
+            createEntry={this.addEntry}
+            readCard={this.selectCard}
+            updateContent={this.updateContent}
+            deleteCard={this.deleteCard}
+            deleteEntry={this.deleteEntry}
+        />);
     }
 
     componentDidMount() {

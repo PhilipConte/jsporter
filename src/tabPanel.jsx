@@ -52,7 +52,7 @@ class TabPanel extends React.Component {
         ));
 
         return (<div>
-            <AppBar position="static" id='tabBar'>
+            <AppBar position="fixed" id='tabBar'>
                 <Tabs
                     value={value}
                     onChange={this.handleChange}

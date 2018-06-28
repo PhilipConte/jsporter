@@ -1,32 +1,104 @@
 import React from 'react';
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Drawer from "@material-ui/core/Drawer";
+import colors from './colors';
+import PlusInput from './plusInput';
+import CardList from './cardList';
 import CardTable from './cardTable';
-import InputDialog from './inputDialog';
 import CenterText from './centerText';
 
-export default class CardView extends React.Component {
+const drawerWidth = 225;
+const marginTop = 48;
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        width: "100%",
+        backgroundColor: theme.palette.background.paper
+    },
+    appBar: {
+        zIndex: 1,
+        marginTop: marginTop,
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        backgroundColor: colors[700],
+    },
+    appToolBar: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    drawerPaper: {
+        zIndex: 0,
+        marginTop: marginTop,
+        width: drawerWidth,
+        backgroundColor: colors[500]
+    },
+    toolbar: theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        height: '100%',
+        //backgroundColor: theme.palette.background.default,
+        marginLeft: drawerWidth,
+        padding: 0
+    },
+    plusInput: {
+        margin: 0,
+        color: 'white',
+    },
+});
+
+class CardView extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const css = "cardView"
-        if (!this.props.card) {
-            return <CenterText text='Select or create a card from the sidebar'/>;
-        }
-        return (<div className='h100'>
-            <h1 className={css}>{(this.props.card)}</h1>
-            <div id="buttonBar">
-            <InputDialog className={css}
-                submitter={entry=>this.props.handleCreate(this.props.card, entry)}
-                text={{
-                    title: "Add Entry", info: "Create a new Entry",
-                    type: "Entry", action: "Add" }}
-            />
+        const {
+            classes, card, cards, entries, 
+            createCard, createEntry, readCard,
+            updateContent, deleteCard, deleteEntry
+        } = this.props;
+        return (<div>
+            <AppBar position="static" className={classes.appBar}>
+                <Toolbar className={classes.appToolBar}>
+                    <Typography variant="title" color="inherit" noWrap>
+                        {card || ' '}
+                    </Typography>
+                    {(card) ? (
+                        <PlusInput className={classes.plusInput}
+                            submitter={entry=>createEntry(card, entry)}
+                            text={ {
+                                title: "Create Entry", info: "Create a new Entry",
+                                type: "Entry", action: "Create"
+                            } }
+                        />
+                    ): ''}
+                </Toolbar>
+            </AppBar>
+            <Drawer
+                variant="permanent"
+                classes={{ paper: classes.drawerPaper }}
+            >
+
+                <CardList
+                    cards={ cards }
+                    handleCreate={ createCard }
+                    handleSelect={ readCard }
+                    handleDelete={ deleteCard }
+                />
+            </Drawer>
+            <div className={classes.content}>
+                {(card) ? (
+                    <CardTable rows={ entries }
+                        handleType={(entry, text)=>updateContent(this.props.card, entry, text)}
+                        handleDelete={entry=>deleteEntry(this.props.card, entry)}
+                    />
+                ): (<CenterText text='Select or create a card from the sidebar'/>)}
             </div>
-            <CardTable rows={this.props.rows}
-                handleType={(entry, text)=>this.props.handleType(this.props.card, entry, text)}
-                handleDelete={entry=>this.props.handleDelete(this.props.card, entry)}
-            />
         </div>);
     }
 }
+
+export default withStyles(styles)(CardView);
