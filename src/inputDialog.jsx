@@ -21,7 +21,7 @@ export default class InputDialog extends React.Component {
 
     @autobind
     handleClose() {
-        this.setState({ open: false });
+        this.setState({ open: false, value: '' });
     }
 
     @autobind
@@ -32,9 +32,16 @@ export default class InputDialog extends React.Component {
 
     @autobind
     handleSubmit() {
-        this.handleClose();
         this.props.submitter(this.state.value);
-        this.setState({ value: '' });
+        this.handleClose();
+    }
+
+    @autobind
+    handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            this.handleSubmit();
+            event.preventDefault();
+        }
     }
 
     render() {
@@ -60,6 +67,7 @@ export default class InputDialog extends React.Component {
                         fullWidth
                         value={this.state.value}
                         onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
                     />
                 </DialogContent>
                 <DialogActions>
