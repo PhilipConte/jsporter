@@ -29,6 +29,10 @@ export default class DBAPI {
     }
 
     addCard(card) {
+        if (!card.length) {
+            ezError("Empty Card Name!");
+            return new Promise((res)=>{throw new Error("Empty Card Name!");});
+        }
         if (this.cList().includes(card)) {
             ezError("Duplicate Card!");
             return new Promise((res)=>{throw new Error("Duplicate Card!");});
@@ -55,6 +59,10 @@ export default class DBAPI {
     }
 
     addEntry(card, entry) {
+        if (!entry.length) {
+            ezError("Empty Entry Name!");
+            return new Promise((res)=>{throw new Error("Empty Entry Name!");});
+        }
         return this.cards[card]
         .findOrCreate({where: {entry: entry}, defaults: {content: ''}})
         .then(data=> {
