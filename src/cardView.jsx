@@ -89,14 +89,18 @@ class CardView extends React.Component {
                     handleDelete={ deleteCard }
                 />
             </Drawer>
-            <div className={classes.content}>
-                {(card) ? (
+            {(card) ? (
+                <div className={classes.content}>
                     <CardTable rows={ entries }
                         handleType={(entry, text)=>updateContent(this.props.card, entry, text)}
                         handleDelete={entry=>deleteEntry(this.props.card, entry)}
                     />
-                ): (<CenterText text='Select or create a card from the sidebar'/>)}
-            </div>
+                </div>
+            ): (<CenterText
+                    text='Select or create a card from the sidebar'
+                    marginL={drawerWidth}
+                />)
+            }
         </div>);
     }
 }

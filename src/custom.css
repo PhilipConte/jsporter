@@ -23,20 +23,6 @@
     background-color: var(--col9);
 }
 
-.centerTextParent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 90%;
-    margin: 0;
-}
-.centerTextChild {
-    display: flex;
-    width: auto;
-    font-size: 20px;
-    margin: 0;
-}
-
 table.cardTable {
     width: 100%;
     border:none;
