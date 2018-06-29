@@ -12,32 +12,26 @@ export default class TabContent extends React.Component {
 
     @autobind
     createCard(card) {
-        this.state.db.addCard(card)
+        this.state.db.createCard(card)
             .then(cards => this.setState({ cards: cards }))
-            .then(() => this.selectCard(card));
+            .then(() => this.readCard(card));
     }
 
     @autobind
-    selectCard(card) {
+    createEntry(card, entry) {
+        this.state.db.createEntry(card, entry)
+            .then(data => this.setState({ cardData: data }));
+    }
+
+    @autobind
+    readCard(card) {
         this.state.db.readCard(card)
             .then(data => this.setState({ selected: card, cardData: data }));
     }
 
     @autobind
-    addEntry(card, entry) {
-        this.state.db.addEntry(card, entry)
-            .then(data => this.setState({ cardData: data }));
-    }
-
-    @autobind
     updateContent(card, entry, text) {
         this.state.db.updateContent(card, entry, text)
-            .then(data => this.setState({ cardData: data }));
-    }
-
-    @autobind
-    deleteEntry(card, entry) {
-        this.state.db.deleteEntry(card, entry)
             .then(data => this.setState({ cardData: data }));
     }
 
@@ -50,16 +44,22 @@ export default class TabContent extends React.Component {
             });
     }
 
+    @autobind
+    deleteEntry(card, entry) {
+        this.state.db.deleteEntry(card, entry)
+            .then(data => this.setState({ cardData: data }));
+    }
+
     render() {
         if (!this.state.isLoaded) return <CenterText text='loading...' />;
-        
+
         return (<CardView
             card={this.state.selected}
             cards={this.state.cards}
             entries={this.state.cardData}
             createCard={this.createCard}
-            createEntry={this.addEntry}
-            readCard={this.selectCard}
+            createEntry={this.createEntry}
+            readCard={this.readCard}
             updateContent={this.updateContent}
             deleteCard={this.deleteCard}
             deleteEntry={this.deleteEntry}

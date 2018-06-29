@@ -37,7 +37,7 @@ export default class DBAPI {
             .then(() => this.db);
     }
 
-    addCard(card) {
+    createCard(card) {
         if (!card.length) {
             return ezPromiseError("Empty Card Name");
         } if (this.cList().includes(card)) {
@@ -57,12 +57,7 @@ export default class DBAPI {
             .then(() => console.log('created table:', card));
     }
 
-    readCard(card) {
-        return this.cards[card].findAll()
-            .then(rows => rows.map(r => [r.get('entry'), r.get('content')]));
-    }
-
-    addEntry(card, entry) {
+    createEntry(card, entry) {
         if (!entry.length) return ezPromiseError("Empty Entry Name");
         return this.cards[card]
             .findOrCreate(
@@ -72,6 +67,11 @@ export default class DBAPI {
                 let created = data[1];
                 if (!created) return ezPromiseError("Duplicate Entry");
             }).then(() => this.readCard(card));
+    }
+
+    readCard(card) {
+        return this.cards[card].findAll()
+            .then(rows => rows.map(r => [r.get('entry'), r.get('content')]));
     }
 
     updateContent(card, entry, text) {
@@ -84,17 +84,17 @@ export default class DBAPI {
                 .then(() => this.readCard(card)));
     }
 
-    deleteEntry(card, entry) {
-        return this.cards[card]
-            .destroy({ where: { entry: entry }, limit: 1 })
-            .then(() => this.readCard(card));
-    }
-
     deleteCard(card) {
         return this.Card
             .destroy({ where: { name: card }, limit: 1 })
             .then(() => this.cards[card].drop())
             .then(() => delete this.cards[card])
             .then(() => this.cList());
+    }
+
+    deleteEntry(card, entry) {
+        return this.cards[card]
+            .destroy({ where: { entry: entry }, limit: 1 })
+            .then(() => this.readCard(card));
     }
 }
