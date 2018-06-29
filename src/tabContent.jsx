@@ -14,8 +14,7 @@ export default class TabContent extends React.Component {
     createCard(card) {
         this.state.db.addCard(card)
         .then(cards => this.setState({cards: cards}))
-        .then(()=>this.selectCard(card))
-        .catch(err=>console.log("error adding card:", err));
+        .then(()=>this.selectCard(card));
     }
 
     @autobind
@@ -27,29 +26,25 @@ export default class TabContent extends React.Component {
     @autobind
     addEntry(card, entry) {
         this.state.db.addEntry(card, entry)
-        .then(data => this.setState({cardData: data}))
-        .catch(err=>console.log("error adding entry:", err));
+        .then(data => this.setState({cardData: data}));
     }
     
     @autobind
     updateContent(card, entry, text) {
         this.state.db.updateContent(card, entry, text)
-        .then(data => this.setState({cardData: data}))
-        .catch(err=>console.log("error updating content:", err));
+        .then(data => this.setState({cardData: data}));
     }
 
     @autobind
     deleteEntry(card, entry) {
         this.state.db.deleteEntry(card, entry)
-        .then(data => this.setState({cardData: data}))
-        .catch(err=>console.log("error deleting entry:", err));
+        .then(data => this.setState({cardData: data}));
     }
 
     @autobind
     deleteCard(card) {
         this.state.db.deleteCard(card)
-        .then(cards=>{this.setState({selected: null, cards: cards});return cards;})
-        .catch(err=>console.log("error deleting card:", err));
+        .then(cards=>{this.setState({selected: null, cards: cards});return cards;});
     }
 
     render() {

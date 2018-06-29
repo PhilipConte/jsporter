@@ -24,8 +24,7 @@ export default class DBAPI {
             Promise.map(cards.map(c => c.get('name')).filter(c => (c && c != `''s`)),
             c => this.createCardTable(c))
         ).then(()=>console.log('this.cards:', this.cards))
-        .then(()=>this.db)
-        .catch(err=>console.log('Error connecting to database:', err));
+        .then(()=>this.db);
     }
 
     addCard(card) {
@@ -49,8 +48,7 @@ export default class DBAPI {
             {freezeTableName: true});
         return newTable.sync({ force: false })
         .then(()=>this.cards[card] = newTable)
-        .then(()=>console.log('created table:', card))
-        .catch(err=>console.log('Error creating table:', err));
+        .then(()=>console.log('created table:', card));
     }
 
     readCard(card) {
