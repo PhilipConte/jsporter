@@ -56,51 +56,47 @@ class CardView extends React.Component {
 
     render() {
         const {
-            classes, card, cards, entries, 
+            classes, card, cards, entries,
             createCard, createEntry, readCard,
             updateContent, deleteCard, deleteEntry
         } = this.props;
+
         return (<div>
             <AppBar position="static" className={classes.appBar}>
-                <Toolbar className={classes.appToolBar}>
+                {(card) ? (<Toolbar className={classes.appToolBar}>
                     <Typography variant="title" color="inherit" noWrap>
-                        {card || ' '}
+                        {card}
                     </Typography>
-                    {(card) ? (
-                        <PlusInput className={classes.plusInput}
-                            submitter={entry=>createEntry(card, entry)}
-                            text={ {
-                                title: "Create Entry", info: "Create a new Entry",
-                                type: "Entry", action: "Create"
-                            } }
-                        />
-                    ): ''}
-                </Toolbar>
+                    <PlusInput className={classes.plusInput}
+                        submitter={entry => createEntry(card, entry)}
+                        text={{
+                            title: "Create Entry",
+                            info: "Create a new Entry",
+                            type: "Entry",
+                            action: "Create"
+                        }}
+                    />
+                </Toolbar>) : ''}
             </AppBar>
             <Drawer
                 variant="permanent"
                 classes={{ paper: classes.drawerPaper }}
             >
-
                 <CardList
-                    cards={ cards }
-                    handleCreate={ createCard }
-                    handleSelect={ readCard }
-                    handleDelete={ deleteCard }
+                    cards={cards}
+                    handleCreate={createCard}
+                    handleSelect={readCard}
+                    handleDelete={deleteCard}
                 />
             </Drawer>
-            {(card) ? (
-                <div className={classes.content}>
-                    <CardTable rows={ entries }
-                        handleType={(entry, text)=>updateContent(this.props.card, entry, text)}
-                        handleDelete={entry=>deleteEntry(this.props.card, entry)}
-                    />
-                </div>
-            ): (<CenterText
-                    text='Select or create a card from the sidebar'
-                    marginL={drawerWidth}
-                />)
-            }
+            {(card) ? (<div className={classes.content}><CardTable
+                rows={entries}
+                handleType={(entry, text) => updateContent(card, entry, text)}
+                handleDelete={entry => deleteEntry(card, entry)}
+            /></div>) : (<CenterText
+                text='Select or create a card from the sidebar'
+                marginL={drawerWidth}
+            />)}
         </div>);
     }
 }
