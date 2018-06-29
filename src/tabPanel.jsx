@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import colors from './colors';
 
 function TabContainer(props) {
     return (
@@ -24,6 +25,9 @@ const styles = theme => ({
         flexGrow: 1,
         width: '100%',
     },
+    tabBar: {
+        backgroundColor: colors[900]
+    }
 });
 
 class TabPanel extends React.Component {
@@ -39,6 +43,7 @@ class TabPanel extends React.Component {
 
     render() {
         const { value } = this.state;
+        const { classes } = this.props
         
         const titles = this.props.titles.map(title =>
             <Tab key={title} label={title}/>
@@ -51,8 +56,8 @@ class TabPanel extends React.Component {
             </TabContainer>
         ));
 
-        return (<div>
-            <AppBar position="fixed" id='tabBar'>
+        return (<div className={classes.root}>
+            <AppBar position="fixed" className={classes.tabBar}>
                 <Tabs
                     value={value}
                     onChange={this.handleChange}
