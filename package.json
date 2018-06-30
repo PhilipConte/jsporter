@@ -2,7 +2,17 @@
   "name": "jsporter",
   "productName": "jsporter",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "An attempt at emulating the 'contacts' portion of Sidekick98",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PhilipConte/jsporter"
+  },
+  "author": {
+    "name": "Philip Conte",
+    "email": "philipmconte@gmail.com",
+    "url": "https://github.com/PhilipConte"
+  },
+  "homepage": "http://www.googleplaymusicdesktopplayer.com",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -12,7 +22,6 @@
     "lint": "eslint --cache --color --ext .jsx,.js src"
   },
   "keywords": [],
-  "author": "pconte",
   "license": "MIT",
   "config": {
     "forge": {
@@ -37,8 +46,8 @@
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "",
-        "name": ""
+        "owner": "PhilipConte",
+        "name": "jsporter"
       },
       "windowsStoreConfig": {
         "packageName": "",
