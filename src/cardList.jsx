@@ -1,11 +1,17 @@
 import React from 'react';
+import autobind from 'autobind-decorator';
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Tooltip from '@material-ui/core/Tooltip';
+import { tabHeight } from './tabPanel';
+import { barHeight } from './cardView';
 import colors from './colors';
 import PlusInput from './plusInput';
-import LiButton from './liButton';
 
 const styles = theme => ({
     root: {
@@ -13,7 +19,7 @@ const styles = theme => ({
         width: "100%",
     },
     appBar: {
-        marginBottom: 4,
+        height: barHeight,
         backgroundColor: colors[700],
     },
     appToolBar: {
@@ -21,47 +27,60 @@ const styles = theme => ({
         justifyContent: 'space-between',
     },
     toolbar: theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        padding: 0
-    },
     plusInput: {
         margin: 0,
         color: 'white',
     },
-    ul: {
-        listStyleType: 'none',
-        margin: 0,
-        padding: '0px 2px',
+    list: {
+        //flexGrow: 1,
+        //flexDirection: 'column',
+        //height: '100px',
+        height: `calc(100vh - ${tabHeight + barHeight}px)`,
+        overflow: "auto",
+        //display: "flex"
     },
-    li: {
-        padding: 2
+    listItem: {
+        paddingTop: 0,
+        paddingBottom: 0,
     },
-    liButton: {
+    listText: {
         color: 'white',
-        fontSize: '18px',
-        background: 'Transparent no-repeat',
-        border: 'none',
-        cursor: 'pointer',
-        overflow: 'hidden',
-        outline: 'none',
-        boxShadow: 'none',
+        fontSize: '20px',
     }
 });
 
 class CardList extends React.Component {
     constructor(props) { super(props); }
     
+    @autobind
+    handleClick(e, c) {
+        event.preventDefault();
+        if (e.type === 'click') {
+            this.props.handleSelect(c);
+        } else if (e.type === 'contextmenu') {
+            this.props.handleDelete(c);
+        }
+    }
+
     render() {
+        console.log('heights', tabHeight+barHeight)
         const { classes } = this.props;
         console.log('card list:',this.props.cards);
 
         var lis = this.props.cards.map(c =>
-            <li key={c} className={classes.li}><LiButton
-                className={classes.liButton} text={c}
-                onClick={()=>this.props.handleSelect(c)}
-                onRightClick={()=>this.props.handleDelete(c)}
-            /></li>
+            <Tooltip key={c} title='Right Click to Delete' placement='top-start'>
+                <ListItem 
+                    button
+                    classes={{ button: classes.listItem }}
+                    onClick={e=>this.handleClick(e, c)}
+                    onContextMenu={e=>this.handleClick(e, c)}
+                >
+                    <ListItemText
+                        classes={{ primary: classes.listText }}
+                        primary={c}
+                    />
+                </ListItem>
+            </Tooltip>
         );
         
         return (<div className={classes.root}>
@@ -79,7 +98,7 @@ class CardList extends React.Component {
                     />
                 </Toolbar>
             </AppBar>
-            <ul className={classes.ul}>{lis}</ul>
+            <List className={classes.list}>{lis}</List>
         </div>);
     }
 }
