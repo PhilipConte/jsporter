@@ -10,22 +10,12 @@ import EntryRow from './entryRow'
 import CenterText from './centerText';
 
 const styles = theme => ({
-    root: {
-        width: "100%",
-        marginTop: 0,
-        overflowX: "auto",
-        overflowY: "auto",
-    },
     head: {
         backgroundColor: colors[500],
         color: 'white',
         position: "sticky",
         top: 0
     },
-    body: {
-        marginTop: 0,
-        overflowY: "auto",
-    }
 });
 
 class CardTable extends React.Component {
@@ -53,7 +43,7 @@ class CardTable extends React.Component {
                     Content
                 </TableCell>
             </TableRow></TableHead>
-            <TableBody className={classes.body}>{trs}</TableBody>
+            <TableBody>{trs}</TableBody>
         </Table>);
     }
 }
