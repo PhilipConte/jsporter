@@ -1,8 +1,30 @@
 import React from 'react';
 import autobind from 'autobind-decorator';
+import { withStyles } from "@material-ui/core/styles";
 import Tooltip from '@material-ui/core/Tooltip';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
-export default class EntryRow extends React.Component {
+const styles = theme => ({
+    row: {
+        hover: true,
+    },
+    multiCell: {
+        whiteSpace: 'normal',
+        wordWrap: 'break-word',
+        padding: 'none',
+        borderLeft: '1px solid #ddd',
+    },
+    textArea: {
+        width: '100%',
+        resize: 'none',
+        border: 0,
+        padding: 8,
+        boxSizing: 'border-box',
+    }
+});
+
+class EntryRow extends React.Component {
     constructor(props) {
         super(props);
 
@@ -12,38 +34,38 @@ export default class EntryRow extends React.Component {
     onType(event) {
         event.preventDefault();
         this.props.onType(this.props.row[0], this.aRef.value);
-        console.log("type event:", this.aRef.value)
+        console.log("type event:", this.aRef.value);
     }
 
     @autobind
     handleClick(e) {
-        event.preventDefault();
         if (e.type === 'click') {
             //console.log('Left click');
         } else if (e.type === 'contextmenu') {
-            console.log('Right click');
-            console.log(e.target.firstChild.nodeValue);
-            this.props.handleDelete(e.target.firstChild.nodeValue);
+            event.preventDefault();
+            this.props.handleDelete(this.props.row[0]);
         }
     }
 
     render() {
-        let css = this.props.className;
+        const { classes } = this.props;
         const lines = (this.props.row[1].match(/\r?\n/g) || '').length + 1;
-        return (<tr>    
-            <td className={css}
-                onClick={this.handleClick} onContextMenu={this.handleClick}
-            >
 
-                <Tooltip title='Right Click to Delete' placement='top'>
-                    <p className='borderless'>{this.props.row[0]}</p>
-                </Tooltip>
-            </td>
-            <td className={css}><textarea
-                className={css} rows={lines}
+        return (<TableRow className={classes.row}>    
+            <Tooltip title='Right Click to Delete' placement='top'>
+                <TableCell
+                    onClick={this.handleClick} onContextMenu={this.handleClick}
+                >
+                        {this.props.row[0]}
+                </TableCell>
+            </Tooltip>
+            <TableCell className={classes.multiCell}><textarea
+                className={classes.textArea} rows={lines}
                 value={this.props.row[1]} onChange={this.onType}
                 ref={(el) => this.aRef = el}
-            ></textarea></td>
-        </tr>);
+            ></textarea></TableCell>
+        </TableRow>);
     }
 }
+
+export default withStyles(styles)(EntryRow);
