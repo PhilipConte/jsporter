@@ -1,10 +1,7 @@
 # jsPorter
 **An attempt at emulating the "contacts" portion of Sidekick98**
 
-## To Use
-
-To run this repository, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed
-
+## Installation
 ```bash
 #ensure you have electron-forge installed
 npm install -g @electron-forge/cli
@@ -15,5 +12,5 @@ cd jsporter
 # Install dependencies
 npm install
 # Run the app
-electron-forge start
+npm start
 ```
