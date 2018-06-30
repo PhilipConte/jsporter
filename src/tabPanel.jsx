@@ -20,13 +20,15 @@ TabContainer.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
+export const tabHeight = 48;
 const styles = theme => ({
     root: {
         flexGrow: 1,
         width: '100%',
     },
     tabBar: {
-        backgroundColor: colors[900]
+        backgroundColor: colors[900],
+        height: tabHeight,
     }
 });
 

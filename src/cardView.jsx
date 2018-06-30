@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Drawer from "@material-ui/core/Drawer";
+import { tabHeight } from './tabPanel';
 import colors from './colors';
 import PlusInput from './plusInput';
 import CardList from './cardList';
@@ -11,7 +12,7 @@ import CardTable from './cardTable';
 import CenterText from './centerText';
 
 const drawerWidth = 225;
-const marginTop = 48;
+export const barHeight = 64;
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -20,8 +21,9 @@ const styles = theme => ({
     },
     appBar: {
         zIndex: 1,
-        marginTop: marginTop,
+        marginTop: tabHeight,
         width: `calc(100% - ${drawerWidth}px)`,
+        height: barHeight,
         marginLeft: drawerWidth,
         backgroundColor: colors[700],
     },
@@ -31,17 +33,19 @@ const styles = theme => ({
     },
     drawerPaper: {
         zIndex: 0,
-        marginTop: marginTop,
+        marginTop: tabHeight,
         width: drawerWidth,
         backgroundColor: colors[500]
     },
     toolbar: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
-        height: '100%',
+        height: `calc(100vh - ${tabHeight + barHeight}px)`,
         //backgroundColor: theme.palette.background.default,
         marginLeft: drawerWidth,
-        padding: 0
+        padding: 0,
+        overflowY: "auto",
+        display: "flex"
     },
     plusInput: {
         margin: 0,
