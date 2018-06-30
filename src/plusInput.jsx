@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import autobind from 'autobind-decorator';
 import IconButton from '@material-ui/core/IconButton';
-import { Plus } from 'mdi-material-ui'
+import { Add } from '@material-ui/icons';
 
 export default class InputDialog extends React.Component {
     constructor(props) {
@@ -52,7 +52,7 @@ export default class InputDialog extends React.Component {
 
         return (<div className={css}>
             <IconButton className={css} onClick={this.handleClickOpen}>
-                <Plus className={css}/>
+                <Add className={css}/>
             </IconButton>
             <Dialog
                 open={this.state.open}
