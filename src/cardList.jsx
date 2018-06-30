@@ -32,14 +32,17 @@ const styles = theme => ({
         color: 'white',
     },
     list: {
-        //flexGrow: 1,
-        //flexDirection: 'column',
+        flexGrow: 1,
+        flexDirection: 'column',
         //height: '100px',
         height: `calc(100vh - ${tabHeight + barHeight}px)`,
         overflow: "auto",
-        //display: "flex"
+        display: "flex",
     },
     listItem: {
+        flexShrink: 0,
+    },
+    listItemButton: {
         paddingTop: 0,
         paddingBottom: 0,
     },
@@ -71,7 +74,8 @@ class CardList extends React.Component {
             <Tooltip key={c} title='Right Click to Delete' placement='top-start'>
                 <ListItem 
                     button
-                    classes={{ button: classes.listItem }}
+                    className={classes.listItem}
+                    classes={{ button: classes.listItemButton }}
                     onClick={e=>this.handleClick(e, c)}
                     onContextMenu={e=>this.handleClick(e, c)}
                 >
