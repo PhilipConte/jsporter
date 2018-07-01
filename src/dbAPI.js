@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize';
+import Promise from 'bluebird';
+import autobind from 'autobind-decorator';
 import { pathToName } from './util';
 import { ezError } from './dialog';
-import Promise from 'bluebird';
-import autobind from 'autobind-decorator'
 
 const ezPromiseError = s => new Promise((r) => {
     ezError(s);
@@ -19,7 +19,10 @@ export default class DBAPI {
     }
 
     connect() {
-        this.db = new Sequelize("sqlite:" + this.fp);
+        this.db = new Sequelize('', '', '', {
+            dialect: 'sqlite',
+            storage: this.fp
+          });
         return this.db.authenticate()
             .then(() => console.log('Connected to:', this.fp))
             .then(() => this.Card = this.db.define(
