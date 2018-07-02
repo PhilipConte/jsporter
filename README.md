@@ -12,12 +12,17 @@ check out the [latest releases](github.com/PhilipConte/jsporter/releases/latest)
 
 ### Compiling from Source
 ```bash
-#install the right version of electron-forge
+#Install the right version of electron-forge
 npm install -g @electron-forge/cli@5.2.2
 
 # Clone the repository
 git clone https://github.com/PhilipConte/jsporter
 cd jsporter
 npm install
+
+#Try it out
 npm start
+
+#Compile
+electron-forge make
 ```
