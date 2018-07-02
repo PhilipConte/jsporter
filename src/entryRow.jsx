@@ -27,14 +27,22 @@ const styles = theme => ({
 class EntryRow extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {value: this.props.defaultValue};
 
         this.onType = this.onType.bind(this);
+        this.onUpdated = this.onUpdated.bind(this);
     }
 
     onType(event) {
         event.preventDefault();
-        this.props.onType(this.props.row[0], this.aRef.value);
-        console.log("type event:", this.aRef.value);
+        this.setState({ value: event.target.value });
+        console.log("onType:", this.state.value);
+    }
+
+    onUpdated(event) {
+        event.preventDefault();
+        this.props.handleSync(this.props.name, this.state.value);
+        console.log("onUpdate:", this.state.value);
     }
 
     @autobind
@@ -43,26 +51,26 @@ class EntryRow extends React.Component {
             //console.log('Left click');
         } else if (e.type === 'contextmenu') {
             event.preventDefault();
-            this.props.handleDelete(this.props.row[0]);
+            this.props.handleDelete(this.props.name);
         }
     }
 
     render() {
         const { classes } = this.props;
-        const lines = (this.props.row[1].match(/\r?\n/g) || '').length + 1;
+        const lines = (this.state.value.match(/\r?\n/g) || '').length + 1;
 
         return (<TableRow className={classes.row}>    
             <Tooltip title='Right Click to Delete' placement='top'>
                 <TableCell
                     onClick={this.handleClick} onContextMenu={this.handleClick}
                 >
-                        {this.props.row[0]}
+                        {this.props.name}
                 </TableCell>
             </Tooltip>
             <TableCell className={classes.multiCell}><textarea
                 className={classes.textArea} rows={lines}
-                value={this.props.row[1]} onChange={this.onType}
-                ref={(el) => this.aRef = el}
+                value={this.state.value} onChange={this.onType}
+                onKeyUp={this.onUpdated}
             ></textarea></TableCell>
         </TableRow>);
     }

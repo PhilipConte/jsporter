@@ -95,7 +95,7 @@ class CardView extends React.Component {
             </Drawer>
             {(card) ? (<div className={classes.content}><CardTable
                 rows={entries}
-                handleType={(entry, text) => updateContent(card, entry, text)}
+                handleSync={(entry, text) => updateContent(card, entry, text)}
                 handleDelete={entry => deleteEntry(card, entry)}
             /></div>) : (<CenterText
                 text='Select or create a card from the sidebar'
