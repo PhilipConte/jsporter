@@ -24,5 +24,5 @@ npm install
 npm start
 
 #Compile
-electron-forge make
+npm run make
 ```
