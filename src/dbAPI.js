@@ -22,7 +22,7 @@ export default class DBAPI {
         this.db = new Sequelize('', '', '', {
             dialect: 'sqlite',
             storage: this.fp
-          });
+        });
         return this.db.authenticate()
             .then(() => console.log('Connected to:', this.fp))
             .then(() => this.Card = this.db.define(

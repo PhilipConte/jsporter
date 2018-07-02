@@ -13,7 +13,7 @@ import { Add } from '@material-ui/icons';
 export default class InputDialog extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { open: false, value:'' };
+        this.state = { open: false, value: '' };
     }
 
     @autobind
@@ -52,7 +52,7 @@ export default class InputDialog extends React.Component {
 
         return (<div className={css}>
             <IconButton className={css} onClick={this.handleClickOpen}>
-                <Add className={css}/>
+                <Add className={css} />
             </IconButton>
             <Dialog
                 open={this.state.open}
