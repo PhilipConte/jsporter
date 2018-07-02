@@ -1,7 +1,7 @@
 {
   "name": "jsporter",
   "productName": "jsporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An attempt at emulating the 'contacts' portion of Sidekick98",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
     "email": "philipmconte@gmail.com",
     "url": "https://github.com/PhilipConte"
   },
-  "homepage": "http://www.googleplaymusicdesktopplayer.com",
+  "homepage": "http://www.github.com/PhilipConte/jsporter",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
