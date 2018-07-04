@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -59,6 +60,7 @@ class TabPanel extends React.Component {
         ));
 
         return (<div className={classes.root}>
+            <CssBaseline />
             <AppBar position="fixed" className={classes.tabBar}>
                 <Tabs
                     value={value}
