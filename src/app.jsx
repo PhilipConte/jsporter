@@ -18,9 +18,11 @@ const toNames = arr => {
     return names.map((el, ind) => {
         if (counts[el] > 1) {
             return arr[ind]
-                .replace(/[/]/g,'/ ')
+                .replace(/[/]/g, '/ ')
                 .replace(/[\\]/g, '\\ ');
-        } else { return el; }
+        } else {
+            return el;
+        }
     });
 }
 
@@ -34,7 +36,7 @@ export default class App extends React.Component {
     }
 
     handleFocus(nextFocus) {
-        this.setState({focused: nextFocus});
+        this.setState({ focused: nextFocus });
     }
 
     addFile(file) {
@@ -78,7 +80,7 @@ export default class App extends React.Component {
             focused: store.get('focused'),
             files: store.get('files')
         });
-        
+
         ipcRenderer.on('file-create', () => {
             let loc = createDialog();
             if (loc) this.addFile(loc);
