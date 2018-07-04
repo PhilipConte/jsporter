@@ -34,19 +34,15 @@ const styles = theme => ({
 });
 
 class TabPanel extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: this.props.defaultIndex };
-    }
+    constructor(props) { super(props); }
 
     @autobind
     handleChange(event, value) {
-        this.setState({ value });
+        this.props.handleFocus(value);
     };
 
     render() {
-        const { value } = this.state;
-        const { classes } = this.props
+        const { classes, value } = this.props
         
         const titles = this.props.titles.map(title =>
             <Tab key={title} label={title}/>

@@ -18,6 +18,11 @@ export default class App extends React.Component {
         this.state = { isLoaded: false };
 
         this.addFile = this.addFile.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
+    }
+
+    handleFocus(nextFocus) {
+        this.setState({focused: nextFocus});
     }
 
     addFile(file) {
@@ -39,7 +44,8 @@ export default class App extends React.Component {
         );
 
         return (<TabPanel
-            defaultIndex={this.state.focused}
+            handleFocus={this.handleFocus}
+            value={this.state.focused}
             titles={names}
             tabs={tabs}
         />);
