@@ -5,12 +5,24 @@ import CenterText from './centerText';
 import TabPanel from './tabPanel';
 import TabContent from './tabContent';
 import { getDBDialog, openDialog, createDialog } from './dialog';
-import { pathToName, isKeyInStore, storePush } from './util';
+import { pathToName, isKeyInStore, storePush, arrCount } from './util';
 
 const store = new Store({
     name: 'renderer-preferences',
     defaults: { 'focused': 0 }
 });
+
+const toNames = arr => {
+    const names = pathToName(arr);
+    const counts = arrCount(names);
+    return names.map((el, ind) => {
+        if (counts[el] > 1) {
+            return arr[ind]
+                .replace(/[/]/g,'/ ')
+                .replace(/[\\]/g, '\\ ');
+        } else { return el; }
+    });
+}
 
 export default class App extends React.Component {
     constructor(props) {
@@ -38,7 +50,7 @@ export default class App extends React.Component {
         if (!isLoaded) return <CenterText text='loading...' />;
 
         const { files } = this.state;
-        const names = pathToName(files);
+        const names = toNames(files);
         const tabs = files.map(f =>
             <TabContent key={f} path={f} />
         );
