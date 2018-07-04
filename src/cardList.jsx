@@ -66,7 +66,6 @@ class CardList extends React.Component {
     }
 
     render() {
-        console.log('heights', tabHeight+barHeight)
         const { classes } = this.props;
         console.log('card list:',this.props.cards);
 
