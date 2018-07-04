@@ -11,3 +11,13 @@ export const isKeyInStore = (store, key) => (
         || store.get(key)[0] != null
     )
 );
+
+export const storePush = (store, key, val) => {
+    const current = store.get(key);
+    if (current) {
+        current.push(val);
+        store.set(key, current);
+    } else {
+        store.set(key, [val]);
+    }
+};

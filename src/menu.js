@@ -1,6 +1,25 @@
-const { app, Menu } = require('electron')
+import {
+    app,
+    Menu,
+    BrowserWindow
+} from 'electron';
+
+const toRenderer = m => BrowserWindow.getFocusedWindow().webContents.send(m);
 
 const template = [
+    {
+        label: 'File',
+        submenu: [
+            {
+                label: "New", accelerator: "CmdOrCtrl+N",
+                click: function () { toRenderer('file-create'); }
+            },
+            {
+                label: "Open", accelerator: "CmdOrCtrl+O",
+                click: function () { toRenderer('file-open'); }
+            },
+        ]
+    },
     {
         label: 'Edit',
         submenu: [
