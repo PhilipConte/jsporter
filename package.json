@@ -21,7 +21,7 @@
     "publish": "electron-forge publish",
     "lint": "eslint --cache --color --ext .jsx,.js src"
   },
-  "keywords": [],
+  "keywords": ["electron", "react", "material-ui", "sequelize", "sqlite", "javascript"],
   "license": "MIT",
   "config": {
     "forge": {
