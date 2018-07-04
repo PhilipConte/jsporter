@@ -8,7 +8,7 @@ _Note that it is in active development and still **very** rough aground the edge
 ## Installation
 
 ### Pre-compiled Binaries
-check out the [latest releases](github.com/PhilipConte/jsporter/releases/latest)
+check out the [latest releases](https://github.com/PhilipConte/jsporter/releases/latest)
 
 ### Compiling from Source
 ```bash
