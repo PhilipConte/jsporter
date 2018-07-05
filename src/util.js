@@ -12,16 +12,6 @@ export const isKeyInStore = (store, key) => (
     )
 );
 
-export const storePush = (store, key, val) => {
-    const current = store.get(key);
-    if (current) {
-        current.push(val);
-        store.set(key, current);
-    } else {
-        store.set(key, [val]);
-    }
-};
-
 export const arrCount = arr => {
     let counts = {};
     for (let i = 0; i < arr.length; i++) {
@@ -29,4 +19,12 @@ export const arrCount = arr => {
         counts[num] = counts[num] ? counts[num] + 1 : 1;
     }
     return counts;
+}
+
+export const uniqueify = (arr, func) => {
+    const simples = func(arr);
+    const counts = arrCount(simples);
+    return simples.map((el, ind) => (
+        (counts[el] > 1) ? arr[ind] : el
+    ));
 }

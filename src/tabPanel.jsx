@@ -7,6 +7,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from '@material-ui/core/IconButton';
+import { Close } from '@material-ui/icons';
 import colors from './colors';
 
 function TabContainer(props) {
@@ -30,6 +33,16 @@ const styles = theme => ({
     tabBar: {
         backgroundColor: colors[900],
         height: tabHeight,
+    },
+    toolbar: {
+    },
+    close: {
+        margin: 0,
+        color: 'white',
+    },
+    title: {
+        height: tabHeight,
+        maxWidth: '100%',
     }
 });
 
@@ -43,9 +56,16 @@ class TabPanel extends React.Component {
 
     render() {
         const { classes, value } = this.props
-        
+
         const titles = this.props.titles.map(title =>
-            <Tab key={title} label={title}/>
+            <Tab component="div" key={title} className={classes.title} label={
+                <Toolbar className={classes.toolbar} disableGutters={true}>
+                    <div>{title}</div>
+                    <IconButton onClick={() => this.props.handleClose(title)}>
+                        <Close className={classes.close} />
+                    </IconButton>
+                </Toolbar >
+            } />
         );
         const tabs = this.props.tabs.map((tab, index) => (
             value === index
@@ -57,16 +77,14 @@ class TabPanel extends React.Component {
 
         return (<div className={classes.root}>
             <CssBaseline />
-            <AppBar position="fixed" className={classes.tabBar}>
-                <Tabs
-                    value={value}
-                    onChange={this.handleChange}
-                    scrollable
-                    scrollButtons="auto"
-                >
-                    {titles}
-                </Tabs>
-            </AppBar>
+            <AppBar position="fixed" className={classes.tabBar}><Tabs
+                value={value}
+                onChange={this.handleChange}
+                scrollable
+                scrollButtons="auto"
+            >
+                {titles}
+            </Tabs></AppBar>
             {tabs}
         </div>);
     }
