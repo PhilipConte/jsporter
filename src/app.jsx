@@ -4,7 +4,7 @@ import Store from 'electron-store';
 import CenterText from './centerText';
 import TabPanel from './tabPanel';
 import TabContent from './tabContent';
-import { getDBDialog, openDialog, createDialog } from './dialog';
+import { getDBDialog, openDialog, createDialog, ezError } from './dialog';
 import { pathToName, isKeyInStore, uniqueify } from './util';
 
 const store = new Store({
@@ -34,10 +34,14 @@ export default class App extends React.Component {
     }
 
     addFile(file) {
-        this.setState({
-            focused: this.state.files.length,
-            files: this.state.files.concat(file)
-        });
+        if (this.state.files.includes(file)) {
+            ezError('You already have that file open');
+        } else {
+            this.setState({
+                focused: this.state.files.length,
+                files: this.state.files.concat(file)
+            });
+        }
     }
 
     render() {
