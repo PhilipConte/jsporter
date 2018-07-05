@@ -3,6 +3,7 @@ import {
     Menu,
     BrowserWindow
 } from 'electron';
+import { version } from '../package.json';
 
 const toRenderer = (m, ...args) => (
     BrowserWindow.getFocusedWindow().webContents.send(m, ...args)
@@ -62,7 +63,7 @@ const template = [
         submenu: [
             {
                 label: 'About',
-                click: function () { toRenderer('aboutInfo', process.env.npm_package_version); }
+                click: function () { toRenderer('aboutInfo', version); }
             },
             {
                 label: 'Learn More',
