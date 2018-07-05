@@ -4,7 +4,9 @@ import {
     BrowserWindow
 } from 'electron';
 
-const toRenderer = m => BrowserWindow.getFocusedWindow().webContents.send(m);
+const toRenderer = (m, ...args) => (
+    BrowserWindow.getFocusedWindow().webContents.send(m, ...args)
+);
 
 const template = [
     {
@@ -58,6 +60,10 @@ const template = [
     {
         role: 'help',
         submenu: [
+            {
+                label: 'About',
+                click: function () { toRenderer('aboutInfo', process.env.npm_package_version); }
+            },
             {
                 label: 'Learn More',
                 click() { require('electron').shell.openExternal('https://github.com/PhilipConte/jsporter') }

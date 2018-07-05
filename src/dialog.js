@@ -50,3 +50,17 @@ export function createDialog() {
 export function ezError(eMessage) {
     dialog.showErrorBox("Error:", eMessage);
 }
+
+export function aboutInfo(version) {
+    dialog.showMessageBox(
+        remote.getCurrentWindow(),
+        {
+            type: "info",
+            buttons: ["OK"],
+            defaultId: 0,
+            title: "About",
+            message: "JsPorter",
+            detail: ("version: " + version),
+        }
+    );
+} 

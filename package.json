@@ -1,7 +1,7 @@
 {
   "name": "jsporter",
   "productName": "jsporter",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "An attempt at emulating the 'contacts' portion of Sidekick98",
   "repository": {
     "type": "git",

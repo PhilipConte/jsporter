@@ -4,7 +4,7 @@ import Store from 'electron-store';
 import CenterText from './centerText';
 import TabPanel from './tabPanel';
 import TabContent from './tabContent';
-import { getDBDialog, openDialog, createDialog, ezError } from './dialog';
+import { getDBDialog, openDialog, createDialog, ezError, aboutInfo } from './dialog';
 import { pathToName, isKeyInStore, uniqueify } from './util';
 
 const store = new Store({
@@ -102,3 +102,7 @@ export default class App extends React.Component {
         });
     }
 }
+
+ipcRenderer.on('aboutInfo', (e, ...args) => {
+    aboutInfo(...args);
+});
