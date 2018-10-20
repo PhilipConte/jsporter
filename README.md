@@ -2,7 +2,7 @@
 
 ## Re-imagining the "contacts" portion of Sidekick98
 
-![JsPorter screenshot](image.png)
+![JsPorter screenshot](https://imgur.com/alkvSrs)
 
 JsPorter is built using electron, react, material-ui, sequelize, and sqlite, and many other amazing web technologies.
 
