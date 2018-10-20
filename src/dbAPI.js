@@ -23,8 +23,7 @@ export default class DBAPI {
             dialect: 'sqlite',
             storage: this.fp
         });
-        await this.db.authenticate()
-        console.log('Connected to:', this.fp);
+        await this.db.authenticate();
         this.Card = await this.db.define(
             'card', { name: Sequelize.STRING }
         );
@@ -35,7 +34,6 @@ export default class DBAPI {
                 .filter(c => (c && c != `''s`)),
             c => this.createCardTable(c)
         );
-        console.log('this.cards:', this.cards);
         return this.db;
     }
 
@@ -59,7 +57,6 @@ export default class DBAPI {
         );
         await newTable.sync({ force: false });
         this.cards[card] = newTable;
-        console.log('created table:', card);
     }
 
     async createEntry(card, entry) {

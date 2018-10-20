@@ -36,19 +36,16 @@ class EntryRow extends React.Component {
     onType(event) {
         event.preventDefault();
         this.setState({ value: event.target.value });
-        console.log("onType:", this.state.value);
     }
 
     onUpdated(event) {
         event.preventDefault();
         this.props.handleSync(this.props.name, this.state.value);
-        console.log("onUpdate:", this.state.value);
     }
 
     @autobind
     handleClick(e) {
         if (e.type === 'click') {
-            //console.log('Left click');
         } else if (e.type === 'contextmenu') {
             event.preventDefault();
             this.props.handleDelete(this.props.name);
@@ -64,7 +61,7 @@ class EntryRow extends React.Component {
                 <TableCell
                     onClick={this.handleClick} onContextMenu={this.handleClick}
                 >
-                        {this.props.name}
+                    {this.props.name}
                 </TableCell>
             </Tooltip>
             <TableCell className={classes.multiCell}><textarea

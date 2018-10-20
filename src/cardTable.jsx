@@ -27,7 +27,6 @@ class CardTable extends React.Component {
         }
 
         const { classes } = this.props;
-        console.log('rows:', this.props.rows);
         let trs = this.props.rows.map(r => <EntryRow
             key={r[0]} name={r[0]} defaultValue={r[1]}
             handleSync={this.props.handleSync}

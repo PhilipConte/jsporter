@@ -67,7 +67,6 @@ class CardList extends React.Component {
 
     render() {
         const { classes } = this.props;
-        console.log('card list:',this.props.cards);
 
         var lis = this.props.cards.map(c =>
             <Tooltip key={c} title='Right Click to Delete' placement='top-start'>
