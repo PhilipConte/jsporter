@@ -15,9 +15,6 @@ check out the [latest releases](https://github.com/PhilipConte/jsporter/releases
 
 ### Compiling from Source
 ```bash
-#Install the right version of electron-forge
-npm install -g @electron-forge/cli@5.2.2
-
 # Clone the repository
 git clone https://github.com/PhilipConte/jsporter
 cd jsporter
