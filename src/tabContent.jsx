@@ -69,8 +69,8 @@ export default class TabContent extends React.Component {
     componentDidMount() {
         var db = new DBAPI(this.props.path);
         db.connect()
-            .then(() =>
-                this.setState({ isLoaded: true, db: db, cards: db.cList() })
+            .then((cardList) =>
+                this.setState({ isLoaded: true, db: db, cards: cardList })
             );
     }
 }
